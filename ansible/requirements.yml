@@ -9,17 +9,17 @@
 
 ## Github forks of Galaxy roles
 # Waiting for merge of PR
-- src: git+ssh://git@github.com/bbaassssiiee/RHEL6-STIG.git
+- src: https://github.com/bbaassssiiee/RHEL6-STIG.git
   version: devel
   path: ./roles/
 
 # Waiting for merge of PR
-- src: git+ssh://git@github.com/bbaassssiiee/ansible-maven.git
+- src: https://github.com/bbaassssiiee/ansible-maven.git
   path: ./roles/
 
 # Waiting for merge of PR
-- src: git+ssh://git@github.com/bbaassssiiee/ansible-ant.git
-  path: ./roles
+- src: https://github.com/bbaassssiiee/ansible-ant.git
+  path: ./roles/
 
 ## Galaxy roles released
 # Centos plumbing for virtual machine provisioning
@@ -48,7 +48,7 @@
 
 # Just another Tomcat, tested on centos6
 - src: hudecof.tomcat
-  path: ./roles
+  path: ./roles/
 
 # Cross platform Java role, needs vars to be configured.
 - src: geerlingguy.java
@@ -56,11 +56,11 @@
 
 # Oracle java, tested on ubuntu
 - src: briancoca.oracle_java7
-  path: ./roles
+  path: ./roles/
 
 # Eclipse, tested on ubuntu
 - src: alban.andrieu.eclipse
-  path: ./roles
+  path: ./roles/
 
 - src: defunctzombie.coreos-bootstrap
-  path: roles/
+  path: ./roles/
