@@ -1,0 +1,9 @@
+---
+# This playbook is run as a provisioner for vagrant
+- hosts: centos6
+  user: vagrant
+  sudo: yes
+
+  roles:
+    - loghost
+

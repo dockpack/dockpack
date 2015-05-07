@@ -1,7 +1,23 @@
+
+# rm -rf .vagrant to release your burdens.
+.vagrant
+
+# Store your secrets here, not on Github
+pki
+
+# Re-use Galaxy roles: use ansible/requirements.yml
+ansible/roles
+
+# Packer builds
+packer_cache
+packer
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 
+# Mac metadata
+.DS_Store
 # C extensions
 *.so
 

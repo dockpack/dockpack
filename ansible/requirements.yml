@@ -1,0 +1,63 @@
+---
+# re-usable roles for Ansible are shared on
+# https://galaxy.ansible.com
+# to re-install: use the force, Luke Skywalker
+# ansible-galaxy install --force -r requirements.yml
+
+- src: bbaassssiiee.commoncentos
+  path: roles/
+
+## Github forks of Galaxy roles
+# Waiting for merge of PR
+- src: git+ssh://git@github.com/bbaassssiiee/RHEL6-STIG.git
+  version: devel
+  path: ./roles/
+
+# Waiting for merge of PR
+- src: git+ssh://git@github.com/bbaassssiiee/ansible-maven.git
+  path: ./roles/
+
+# Waiting for merge of PR
+- src: git+ssh://git@github.com/bbaassssiiee/ansible-ant.git
+  path: ./roles
+
+## Galaxy roles released
+# Centos plumbing for virtual machine provisioning
+- src: bbaassssiiee.commoncentos
+  path: ./roles/
+
+# MySQL variant, tested on centos6
+- src: pcextreme.mariadb
+  path: ./roles/
+
+# Nexus as dependency proxy, tested on centos6
+- src: hullufred.nexus
+  path: ./roles/
+
+# Artifactory ad target repository, tested on centos6
+- src: bbaassssiiee.artifactory
+  path: ./roles/
+
+# SonarQube source code control, tested on centos6
+- src: bbaassssiiee.sonar
+  path: ./roles/
+
+# Needs port 80 deploy standalone, not tested
+- src: Ginsys.omnibus-gitlab
+  path: ./roles/
+
+# Just another Tomcat, tested on centos6
+- src: hudecof.tomcat
+  path: ./roles
+
+# Cross platform Java role, needs vars to be configured.
+- src: geerlingguy.java
+  path: ./roles/
+
+# Oracle java, tested on ubuntu
+- src: briancoca.oracle_java7
+  path: ./roles
+
+# Eclipse, tested on ubuntu
+- src: alban.andrieu.eclipse
+  path: ./roles

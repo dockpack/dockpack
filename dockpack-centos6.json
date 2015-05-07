@@ -1,0 +1,131 @@
+{
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "override": {
+        "virtualbox-iso": {
+          "scripts": [
+            "scripts/virtualbox.sh",
+            "scripts/ansible.sh"
+          ]
+        },
+        "vmware-iso": {
+          "scripts": [
+            "scripts/vmware.sh",
+            "scripts/ansible.sh"
+          ]
+        },
+        "qemu": {
+          "scripts": [
+            "scripts/ansible.sh"
+          ]
+        }
+      }
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "ansible/packer.yml",
+      "role_paths": [
+        "ansible/roles/bbaassssiiee.commoncentos",
+        "ansible/roles/motd",
+        "ansible/roles/RHEL6-STIG"
+      ]
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/cleanup.sh"
+    }
+  ],
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-6.6-x86_64-noX.cfg<enter><wait>"
+      ],
+      "guest_os_type": "RedHat_64",
+      "headless": false,
+      "http_directory": "kickstart",
+      "iso_urls": [
+        "file:///tmp/CentOS-6.6-x86_64-netinstall.iso",
+        "http://www.mirrorservice.org/sites/mirror.centos.org/6/isos/x86_64/CentOS-6.6-x86_64-netinstall.iso"
+      ],
+      "iso_checksum_type": "md5",
+      "iso_checksum": "2342bc5ea72fc028972aa0f21cee28b4",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+      "virtualbox_version_file": ".vbox_version",
+      "vm_name": "dockpack/centos6",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "512"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "2"
+        ]
+      ]
+    },
+    {
+      "type": "vmware-iso",
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-6.6-x86_64-noX.cfg<enter><wait>"
+      ],
+      "boot_wait": "20s",
+      "guest_os_type": "centos-64",
+      "headless": false,
+      "http_directory": "kickstart",
+      "iso_urls": [
+        "file:///tmp/CentOS-6.6-x86_64-netinstall.iso",
+        "http://www.mirrorservice.org/sites/mirror.centos.org/6/isos/x86_64/CentOS-6.6-x86_64-netinstall.iso"
+      ],
+      "iso_checksum_type": "md5",
+      "iso_checksum": "2342bc5ea72fc028972aa0f21cee28b4",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "tools_upload_flavor": "linux",
+      "vm_name": "dockpack/centos6",
+      "vmx_data": {
+        "cpuid.coresPerSocket": "1",
+        "memsize": "512",
+        "numvcpus": "2"
+      }
+    },
+    {
+      "type": "qemu",
+      "boot_command":
+      [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-6.6-x86_64-noX.cfg<enter><wait>"
+      ],
+      "iso_urls": [
+        "file:///tmp/CentOS-6.6-x86_64-netinstall.iso",
+        "http://www.mirrorservice.org/sites/mirror.centos.org/6/isos/x86_64/CentOS-6.6-x86_64-netinstall.iso"
+      ],
+      "disk_interface": "virtio",
+      "headless": false,
+      "http_directory": "kickstart",
+      "iso_checksum_type": "md5",
+      "iso_checksum": "2342bc5ea72fc028972aa0f21cee28b4",
+      "net_device": "virtio-net",
+      "shutdown_command": "",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "vm_name": "dockpack/centos6"
+
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "keep_input_artifact": false,
+      "output": "packer/{{.Provider}}-centos6.box"
+    }
+  ]
+}
