@@ -98,7 +98,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     ubuntu14_config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/20150506/trusty-server-cloudimg-amd64-vagrant-disk1.box"
     ubuntu14_config.vm.box_download_checksum = "f6438c4155fb9c02d642fb8bbdda5d021cc529d8f85b0aad0f6be820293a11d3" 
     ubuntu14_config.vm.box_download_checksum_type = "sha256"
-    ubuntu14_config.vm.network "forwarded_port", id: 'ssh', guest: 22, host: 2203, auto_correct: true
+    ubuntu14_config.vm.network "forwarded_port", id: 'ssh', guest: 22, host: 2202, auto_correct: true
     
     ubuntu14_config.vm.provider "vmware_fusion" do |vmware|
       vmware.vmx["memsize"] = "2048"
@@ -114,7 +114,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define :fedora21, autostart: true do |fedora21_config|
     fedora21_config.vm.box = "chef/fedora-21"
     fedora21_config.vm.box_url = "https://atlas.hashicorp.com/chef/boxes/fedora-21"
-    fedora21_config.vm.network "forwarded_port", id: 'ssh', guest: 22, host: 2202, auto_correct: true
+    fedora21_config.vm.network "forwarded_port", id: 'ssh', guest: 22, host: 2203, auto_correct: true
     
     fedora21_config.vm.provider "vmware_fusion" do |vmware|
       vmware.vmx["memsize"] = "2048"
