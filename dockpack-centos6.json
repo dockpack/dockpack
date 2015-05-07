@@ -124,7 +124,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "keep_input_artifact": false,
+      "keep_input_artifact": true,
       "output": "packer/{{.Provider}}-centos6.box"
     }
   ]
