@@ -9,6 +9,7 @@ pki
 ansible/roles
 
 # Packer builds
+output-virtualbox-iso
 packer_cache
 packer
 
