@@ -57,7 +57,7 @@
       "ssh_password": "vagrant",
       "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
       "virtualbox_version_file": ".vbox_version",
-      "vm_name": "dockpack/centos6",
+      "vm_name": "centos6",
       "vboxmanage": [
         [
           "modifyvm",
@@ -91,7 +91,7 @@
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
       "tools_upload_flavor": "linux",
-      "vm_name": "dockpack/centos6",
+      "vm_name": "centos6",
       "vmx_data": {
         "cpuid.coresPerSocket": "1",
         "memsize": "512",
@@ -117,7 +117,7 @@
       "shutdown_command": "",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
-      "vm_name": "dockpack/centos6"
+      "vm_name": "centos6"
 
     }
   ],
