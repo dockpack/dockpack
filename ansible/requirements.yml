@@ -61,3 +61,6 @@
 # Eclipse, tested on ubuntu
 - src: alban.andrieu.eclipse
   path: ./roles
+
+- src: defunctzombie.coreos-bootstrap
+  path: roles/
