@@ -59,7 +59,7 @@ realclean:
 	vagrant destroy -f centos6 || true
 	vagrant box remove centos6 --provider=virtualbox || true
 	vagrant box remove centos6 --provider=vmware_desktop || true
-    rm -f crash.log || true
+	rm -f crash.log || true
 	rm -f packer/virtualbox-centos6.box || true
 	rm -f packer/vmware-centos6.box || true
 	rm -rf packer_cache
