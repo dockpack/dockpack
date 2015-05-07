@@ -41,7 +41,7 @@ packer/vmware-win7ie10.box:
 	packer build --only=vmware-iso dockpack-win7ie10.json
 
 virtualwinvm: packer/virtualbox-win7ie10.box
-	vagrant box add --force dockpack/win7ie10 packer/virtualbox-win7ie10.box
+	vagrant box add --force win7ie10 packer/virtualbox-win7ie10.box
 
 windows: virtualwinvm
 	vagrant up windows_7

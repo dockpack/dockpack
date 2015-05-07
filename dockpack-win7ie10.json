@@ -36,7 +36,7 @@
         "./scripts/openssh.ps1",
         "./scripts/oracle-cert.cer"
       ],
-      "vm_name": "dockpack/win7ie10",
+      "vm_name": "win7ie10",
       "vboxmanage": [
         [
           "modifyvm",
@@ -54,7 +54,7 @@
     },
     {
       "type": "vmware-iso",
-      "vm_name": "dockpack/win7ie10",
+      "vm_name": "win7ie10",
       "iso_urls": [
         "file:///tmp/7600.16385.090713-1255_x64fre_enterprise_en-us_EVAL_Eval_Enterprise-GRMCENXEVAL_EN_DVD.iso",
         "http://care.dlservice.microsoft.com/dl/download/evalx/win7/x64/EN/7600.16385.090713-1255_x64fre_enterprise_en-us_EVAL_Eval_Enterprise-GRMCENXEVAL_EN_DVD.iso"

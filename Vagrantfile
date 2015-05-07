@@ -36,7 +36,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Windows: You need to create a temporarily licenced Windows box with 'packer build win7ie10.json'
   config.vm.define :windows_7, autostart: true do |windows_7_config|
-    windows_7_config.vm.box = "dockpack/windows_7"
+    windows_7_config.vm.box = "dockpack/win7ie10"
     windows_7_config.vm.communicator = "winrm"
   
     windows_7_config.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true
@@ -112,7 +112,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   ## Chef's Bento project on Hashicorp Atlas: Bento project https://github.com/chef/bento
   # Just an example of a linux from this project
   config.vm.define :fedora21, autostart: true do |fedora21_config|
-    fedora21_config.vm.box = "chef/fedora-12"
+    fedora21_config.vm.box = "chef/fedora-21"
     fedora21_config.vm.box_url = "https://atlas.hashicorp.com/chef/boxes/fedora-21"
     fedora21_config.vm.network "forwarded_port", id: 'ssh', guest: 22, host: 2202, auto_correct: true
     
