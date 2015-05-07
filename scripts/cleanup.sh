@@ -16,7 +16,6 @@ echo "==> Cleaning up temporary network addresses"
 if grep -q -i "release 6" /etc/redhat-release ; then
     rm -f /etc/udev/rules.d/70-persistent-net.rules
     mkdir /etc/udev/rules.d/70-persistent-net.rules
-    rm /lib/udev/rules.d/75-persistent-net-generator.rules
 fi
 rm -rf /dev/.udev/
 if [ -f /etc/sysconfig/network-scripts/ifcfg-eth0 ] ; then
