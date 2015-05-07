@@ -36,7 +36,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Windows: You need to create a temporarily licenced Windows box with 'packer build win7ie10.json'
   config.vm.define :windows_7, autostart: true do |windows_7_config|
-    windows_7_config.vm.box = "dockpack/win7ie10"
+    windows_7_config.vm.box = "win7ie10"
     windows_7_config.vm.communicator = "winrm"
   
     windows_7_config.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true
@@ -51,7 +51,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     windows_7_config.vm.provider :virtualbox do |vb, override|
         vb.gui = true
-        vb.name = "dockpack/windows_7"
+        vb.name = "win7ie10"
         vb.customize ["modifyvm", :id, "--memory", 2048]
         vb.customize ["modifyvm", :id, "--cpus", 2]
         vb.customize ["setextradata", "global", "GUI/SuppressMessages", "all" ]
@@ -80,7 +80,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Centos 6: Create the DISO STIG hardened centos6 box with 'packer build centos6.json'
   config.vm.define :centos6, autostart: true do |centos6_config|
-    centos6_config.vm.box = "dockpack/centos6"  # to delete: 'vagrant destroy; box remove centos6'
+    centos6_config.vm.box = "centos6"  # to delete: 'vagrant destroy; box remove centos6'
     centos6_config.vm.network "forwarded_port", id: 'ssh', guest: 22, host: 2201, auto_correct: true
     
     centos6_config.vm.provider "vmware_fusion" do |vmware|
@@ -88,7 +88,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       vmware.vmx["numvcpus"] = "2"
     end
     centos6_config.vm.provider "virtualbox" do |vb|
-      vb.name = "dockpack/centos6"
+      vb.name = "centos6"
     end
   end
 
