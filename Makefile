@@ -19,11 +19,11 @@ packer/virtualbox-centos6.box:
 	packer validate dockpack-centos6.json
 	packer build -only=virtualbox-iso dockpack-centos6.json
 
-packer/vmware-centos6.box: 
+packer/vmware-centos6.box:
 	packer validate dockpack-centos6.json
 	packer build --only=vmware-iso dockpack-centos6.json
 
-packer/qemu-centos6.box: 
+packer/qemu-centos6.box:
 	packer build --only=qemu dockpack-centos6.json
 
 virtualvm: packer/virtualbox-centos6.box
@@ -36,7 +36,7 @@ packer/virtualbox-win7ie10.box:
 	packer validate dockpack-win7ie10.json
 	packer build -only=virtualbox-iso dockpack-win7ie10.json
 
-packer/vmware-win7ie10.box: 
+packer/vmware-win7ie10.box:
 	packer validate dockpack-win7ie10.json
 	packer build --only=vmware-iso dockpack-win7ie10.json
 
