@@ -1,3 +1,4 @@
+VAGRANT_DEFAULT_PROVIDER=virtualbox
 DOWNLOADS=./downloads
 
 help:
