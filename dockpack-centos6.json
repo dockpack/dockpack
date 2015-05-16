@@ -28,7 +28,6 @@
       "playbook_file": "ansible/packer.yml",
       "role_paths": [
         "ansible/roles/bbaassssiiee.commoncentos",
-        "ansible/roles/motd",
         "ansible/roles/RHEL6-STIG"
       ]
     },

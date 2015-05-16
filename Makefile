@@ -1,4 +1,3 @@
-VAGRANT_DEFAULT_PROVIDER=virtualbox
 DOWNLOADS=./downloads
 
 help:
@@ -56,6 +55,10 @@ vmware: vmwarevm
 
 up: virtualbox
 
+clean:
+	rm -rf output-virtualbox-iso
+	rm -rf packer/*
+
 realclean:
 	vagrant destroy -f centos6 || true
 	vagrant box remove centos6 --provider=virtualbox || true
@@ -71,5 +74,5 @@ download:
 	wget --limit-rate=10m --tries=10 --retry-connrefused --waitretry=180 --directory-prefix=${DOWNLOADS} --no-clobber http://www.mirrorservice.org/sites/mirror.centos.org/6/isos/x86_64/CentOS-6.6-x86_64-netinstall.iso && ln -fs downloads/CentOS-6.6-x86_64-netinstall.iso /tmp/CentOS-6.6-x86_64-netinstall.iso || /bin/false
 
 
-all: download up audit
+all: download centos6 audit
 

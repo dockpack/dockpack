@@ -5,6 +5,7 @@
   sudo: yes
 
   roles:
+    - issue
     - loghost
 
 - name: bootstrap ubuntu hosts
