@@ -1,0 +1,129 @@
+{
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "override": {
+        "virtualbox-iso": {
+          "scripts": [
+            "scripts/virtualbox.sh",
+            "scripts/ansible.sh"
+          ]
+        },
+        "vmware-iso": {
+          "scripts": [
+            "scripts/vmware.sh",
+            "scripts/ansible.sh"
+          ]
+        },
+        "qemu": {
+          "scripts": [
+            "scripts/ansible.sh"
+          ]
+        }
+      }
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "ansible/packer.yml",
+      "role_paths": [
+        "ansible/roles/issue"
+      ]
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
+      "script": "scripts/cleanup.sh"
+    }
+  ],
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/fedora-21-x86_64-noX.cfg<enter><wait>"
+      ],
+      "guest_os_type": "RedHat_64",
+      "headless": false,
+      "http_directory": "kickstart",
+      "iso_urls": [
+        "file:///tmp/Fedora-Server-netinst-x86_64-21.iso",
+        "http://www.mirrorservice.org/sites/download.fedora.redhat.com/pub/fedora/linux/releases/21/Server/x86_64/iso/Fedora-Server-netinst-x86_64-21.iso"
+      ],
+      "iso_checksum_type": "sha256",
+      "iso_checksum": "56af126a50c227d779a200b414f68ea7bcf58e21c8035500cd21ba164f85b9b4",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+      "virtualbox_version_file": ".vbox_version",
+      "vm_name": "fedora21",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "512"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "2"
+        ]
+      ]
+    },
+    {
+      "type": "vmware-iso",
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/fedora-21-x86_64-noX.cfg<enter><wait>"
+      ],
+      "boot_wait": "20s",
+      "guest_os_type": "fedora-core",
+      "headless": false,
+      "http_directory": "kickstart",
+      "iso_urls": [
+        "file:///tmp/Fedora-Server-netinst-x86_64-21.iso",
+        "http://www.mirrorservice.org/sites/download.fedora.redhat.com/pub/fedora/linux/releases/21/Server/x86_64/iso/Fedora-Server-netinst-x86_64-21.iso"
+      ],
+      "iso_checksum_type": "sha256",
+      "iso_checksum": "56af126a50c227d779a200b414f68ea7bcf58e21c8035500cd21ba164f85b9b4",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "tools_upload_flavor": "linux",
+      "vm_name": "fedora21",
+      "vmx_data": {
+        "cpuid.coresPerSocket": "1",
+        "memsize": "512",
+        "numvcpus": "2"
+      }
+    },
+    {
+      "type": "qemu",
+      "boot_command":
+      [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-6.6-x86_64-noX.cfg<enter><wait>"
+      ],
+      "iso_urls": [
+        "file:///tmp/CentOS-6.6-x86_64-netinstall.iso",
+        "http://www.mirrorservice.org/sites/mirror.centos.org/6/isos/x86_64/CentOS-6.6-x86_64-netinstall.iso"
+      ],
+      "disk_interface": "virtio",
+      "headless": false,
+      "http_directory": "kickstart",
+      "iso_checksum_type": "md5",
+      "iso_checksum": "2342bc5ea72fc028972aa0f21cee28b4",
+      "net_device": "virtio-net",
+      "shutdown_command": "",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "vm_name": "centos6"
+
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "keep_input_artifact": true,
+      "output": "packer/{{.Provider}}-centos6.box"
+    }
+  ]
+}
