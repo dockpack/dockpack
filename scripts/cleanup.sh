@@ -1,8 +1,6 @@
 #!/bin/bash -eux
 
-yum -y erase gcc cpp libstdc++-devel kernel-devel kernel-headers perl
-# For STIG compliance audit, openswan removed by line above
-yum -y install openswan 
+yum -y erase gcc cpp libstdc++-devel kernel-devel kernel-headers
 
 yum -y clean all
 rm -rf VBoxGuestAdditions_*.iso VBoxGuestAdditions_*.iso.?
