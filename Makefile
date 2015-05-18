@@ -73,7 +73,7 @@ virtualwinvm: packer/virtualbox-win7ie10.box
 windows: virtualwinvm
 	vagrant up windows_7
 
-centos6:
+centos6: virtualvm
 	vagrant up centos6
 
 virtualbox: windows centos6
