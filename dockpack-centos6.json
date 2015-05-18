@@ -15,11 +15,6 @@
             "scripts/vmware.sh",
             "scripts/ansible.sh"
           ]
-        },
-        "qemu": {
-          "scripts": [
-            "scripts/ansible.sh"
-          ]
         }
       }
     },
@@ -96,28 +91,6 @@
         "memsize": "512",
         "numvcpus": "2"
       }
-    },
-    {
-      "type": "qemu",
-      "boot_command":
-      [
-        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-6.6-x86_64-noX.cfg<enter><wait>"
-      ],
-      "iso_urls": [
-        "file:///tmp/CentOS-6.6-x86_64-netinstall.iso",
-        "http://www.mirrorservice.org/sites/mirror.centos.org/6/isos/x86_64/CentOS-6.6-x86_64-netinstall.iso"
-      ],
-      "disk_interface": "virtio",
-      "headless": false,
-      "http_directory": "kickstart",
-      "iso_checksum_type": "md5",
-      "iso_checksum": "2342bc5ea72fc028972aa0f21cee28b4",
-      "net_device": "virtio-net",
-      "shutdown_command": "",
-      "ssh_username": "vagrant",
-      "ssh_password": "vagrant",
-      "vm_name": "centos6"
-
     }
   ],
   "post-processors": [
