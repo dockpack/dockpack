@@ -3,18 +3,15 @@ DOWNLOADS=/tmp/
 
 help:
 	@echo 'Usage:'
-	@echo '    make install'
+	@echo '    make demo'
 	@echo '    make all'
 
 
 install:
 	(cd ansible && ansible-galaxy install --force -r requirements.yml)
 
-stig: install
-	ansible-playbook --private-key=pki/vagrant.rsa -i ansible/ansible.ini -l centos6 ansible/RHEL-STIG1.yml ansible/RHEL-STIG2.yml
-
 audit:	
-	ansible-playbook --private-key=pki/vagrant.rsa -i ansible/ansible.ini -l centos6 ansible/security_audit.yml
+	ansible-playbook --private-key=pki/vagrant.rsa -i ansible/inventory/ansible.ini -l centos6 ansible/security_audit.yml
 
 # ---------------------------------------------------------
 
@@ -52,9 +49,14 @@ virtualfedora: packer/virtualbox-fedora21.box
 vmfedora: packer/vmware-fedora21.box
 	vagrant box add --force fedora21 packer/vmware-fedora21.box
 
-fedora: virtualfedora
+fedora:
 	vagrant up fedora21
 
+ubuntu:
+	vagrant up ubuntu14
+
+coreos:
+	vagrant up coreos
 # ---------------------------------------------------------
 
 packer/virtualbox-win7ie10.box:
@@ -71,7 +73,7 @@ virtualwinvm: packer/virtualbox-win7ie10.box
 windows: virtualwinvm
 	vagrant up windows_7
 
-centos6: virtualvm
+centos6:
 	vagrant up centos6
 
 virtualbox: windows centos6
@@ -109,5 +111,6 @@ dlfed:
 	http://www.mirrorservice.org/sites/download.fedora.redhat.com/pub/fedora/linux/releases/21/Server/x86_64/iso/Fedora-Server-netinst-x86_64-21.iso \
 	&& mv ${DOWNLOADS}/Fedora-Server-netinst-x86_64-21.iso ${DOWNLOADS} || true
 
-demo: clean install centos6 audit
+demo: clean install virtualvm centos6 audit
 
+all: centos6 fedora ubuntu
