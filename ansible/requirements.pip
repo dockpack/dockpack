@@ -1,17 +1,8 @@
-argparse
-cloudmonkey
-cs==0.6.4
-ecdsa
 httplib2
-ipaddress
 Jinja2
-MarkupSafe
-netaddr
 paramiko
 pycrypto
-pymongo
 PyYAML
 requests
 selenium
 wsgiref
-zabbix-api
