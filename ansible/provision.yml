@@ -1,5 +1,7 @@
 ---
 # This playbook is run as a provisioner for vagrant
+
+### centos6
 - hosts: centos6
   user: vagrant
   sudo: yes
@@ -10,7 +12,13 @@
   roles:
     - issue
     - loghost
+    - geerlingguy.java
+    - pcextreme.mariadb
+    - { role: RHEL6-STIG, rhel6stig_cat2: true, rhel6stig_cat3: true, rhel6stig_is_mail_relay: true }
 
+  tasks:
+    - include: tasks/dockpack.yml
+### Ubuntu
 - name: bootstrap ubuntu hosts
   hosts: ubuntu
   gather_facts: True
@@ -18,16 +26,31 @@
 
   vars_files:
     - "group_vars/ubuntu"
+
+  pre_tasks:
+    - include: tasks/dockpack.yml
+
   roles:
     - geerlingguy.java
+    - ansible-maven
+    - ansible-ant
+#    - ansible-eclipse
 
+  tasks:
+    - include: tasks/dockpack.yml
+
+### fedora
 - name: bootstrap fedora hosts
   hosts: fedora21
   gather_facts: True
   sudo: yes
 
+  roles:
+    - issue
+
   tasks:
-     include: tasks/install_docker.yml
+    - include: tasks/install_docker.yml
+    - include: tasks/dockpack.yml
 
 - name: bootstrap coreos hosts
   hosts: coreos

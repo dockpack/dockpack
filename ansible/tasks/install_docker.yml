@@ -1,0 +1,36 @@
+
+    - name: 'yum: ensure packages are installed'
+      yum: name={{ item }} state=installed
+      with_items:
+        - wget
+        - git
+        - ansible
+        - curl
+        - unzip
+        - make
+        - docker
+
+    - name: 'group: ensure the dockerroot is present'
+      group: name=dockerroot gid=991 state=present system=yes
+
+    - name: 'user: ensure vagrant is member of dockerroot group'
+      user: name=vagrant groups=dockerroot append=yes
+
+    - name: 'service: enable docker'
+      sudo: yes
+      service: name=docker enabled=true
+
+    - name: 'configure /etc/sysconfig/docker'
+      lineinfile: state=present backup=no dest=/etc/sysconfig/docker regexp='^OPTIONS' line="OPTIONS='--selinux-enabled --group=dockerroot'"
+
+    - name: 'start docker'
+      service: name=docker state=started
+
+    - name: 'authorize vagrant for docker'
+      file: dest=/var/run/docker.sock group=dockerroot
+
+    - name: 'shell: yum update'
+      shell: yum -y update
+
+    - name: 'restart docker'
+      service: name=docker state=restarted

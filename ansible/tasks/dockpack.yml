@@ -1,0 +1,20 @@
+    - name: 'ensure rpms are installed'
+      yum: name={{ item }} state=present
+      with_items: 
+        - git    
+      when: ansible_os_family == 'RedHat'
+
+    - name: 'update apt cache'
+      apt: update_cache=yes cache_valid_time=86400
+      when: ansible_distribution in [ 'Ubuntu' ]
+
+    - name: 'ensure packages are installed'
+      apt: "name={{ item }} state=installed"
+      when: ansible_distribution in [ 'Ubuntu' ]
+      with_items: 
+        - git
+
+    - name: 'git clone dockpack'
+      sudo: no
+      git: dest=/home/vagrant/dockpack
+           repo=https://github.com/dockpack/dockpack.git

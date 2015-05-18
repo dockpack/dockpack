@@ -12,7 +12,7 @@ install:
 
 audit:	
 	ansible-playbook --private-key=pki/vagrant.rsa -i ansible/inventory/ansible.ini -l centos6 ansible/security_audit.yml
-
+	open file:///tmp/rhel-stig-report.html
 # ---------------------------------------------------------
 
 packer/virtualbox-centos6.box:
