@@ -82,7 +82,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define :centos6, autostart: true do |centos6_config|
     centos6_config.vm.box = "centos6"  # to delete: 'vagrant destroy; box remove centos6'
     centos6_config.vm.network "forwarded_port", id: 'ssh', guest: 22, host: 2201, auto_correct: true
-    
+   
     centos6_config.vm.provider "vmware_fusion" do |vmware|
       vmware.vmx["memsize"] = "2048"
       vmware.vmx["numvcpus"] = "2"
@@ -104,6 +104,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
     ubuntu14_config.vm.provider "virtualbox" do |virtualbox|
       virtualbox.name = "ubuntu14"
+      virtualbox.gui = true
     end
   end
 
