@@ -1,3 +1,5 @@
 ---
+location: 'Appsterdam'
+
 java_packages:
   - java-1.7.0-openjdk
