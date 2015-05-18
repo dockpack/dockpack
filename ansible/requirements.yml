@@ -8,10 +8,6 @@
   path: roles/
 
 ## Github forks of Galaxy roles
-# Waiting for merge of PR
-- src: https://github.com/bbaassssiiee/RHEL6-STIG.git
-  version: devel
-  path: ./roles/
 
 # Waiting for merge of PR
 - src: https://github.com/bbaassssiiee/ansible-maven.git
@@ -21,7 +17,16 @@
 - src: https://github.com/bbaassssiiee/ansible-ant.git
   path: ./roles/
 
+# alban.andrieu.eclipse runs local as root.
+- src: https://github.com/bbaassssiiee/ansible-eclipse.git
+  path: ./roles/
+
 ## Galaxy roles released
+
+- src: https://github.com/MindPointGroup/RHEL6-STIG.git
+  version: devel
+  path: ./roles/
+
 # Centos plumbing for virtual machine provisioning
 - src: bbaassssiiee.commoncentos
   path: ./roles/
@@ -56,10 +61,6 @@
 
 # Oracle java, tested on ubuntu
 - src: briancoca.oracle_java7
-  path: ./roles/
-
-# Eclipse, tested on ubuntu
-- src: alban.andrieu.eclipse
   path: ./roles/
 
 - src: defunctzombie.coreos-bootstrap
