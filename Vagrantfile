@@ -95,8 +95,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   ## Ubuntu Official: https://cloud-images.ubuntu.com/vagrant/
   config.vm.define :ubuntu14, autostart: true do |ubuntu14_config|
     ubuntu14_config.vm.box = "ubuntu14"
-    ubuntu14_config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/20150506/trusty-server-cloudimg-amd64-vagrant-disk1.box"
-    ubuntu14_config.vm.box_download_checksum = "f6438c4155fb9c02d642fb8bbdda5d021cc529d8f85b0aad0f6be820293a11d3" 
+    ubuntu14_config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/trusty-server-cloudimg-amd64-juju-vagrant-disk1.box"
+    ubuntu14_config.vm.box_download_checksum = "818412bd6b40f9823eb4630c75e6d4c3e0b9d80c51d84a34f226aa61bc64bb93" 
     ubuntu14_config.vm.box_download_checksum_type = "sha256"
     ubuntu14_config.vm.network "forwarded_port", id: 'ssh', guest: 22, host: 2202, auto_correct: true
     
