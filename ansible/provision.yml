@@ -4,6 +4,9 @@
   user: vagrant
   sudo: yes
 
+  vars_files:
+    - "group_vars/centos6"
+
   roles:
     - issue
     - loghost
@@ -13,6 +16,8 @@
   gather_facts: True
   sudo: yes
 
+  vars_files:
+    - "group_vars/ubuntu"
   roles:
     - geerlingguy.java
 
@@ -27,6 +32,9 @@
 - name: bootstrap coreos hosts
   hosts: coreos
   gather_facts: False
+
+  vars_files:
+    - "group_vars/coreos"
 
   roles:
     - defunctzombie.coreos-bootstrap

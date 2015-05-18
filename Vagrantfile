@@ -6,7 +6,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   
   # provision.yml runs on a vagrant up, packer.yml runs on packer build.
   config.vm.provision "ansible" do |ansible|
-    ansible.inventory_path = "ansible/ansible.ini"
+    ansible.inventory_path = "ansible/inventory/ansible.ini"
     ansible.playbook = "ansible/provision.yml"
     ansible.verbose = "vv"
    end  
