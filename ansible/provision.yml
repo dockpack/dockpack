@@ -38,11 +38,3 @@
 
   roles:
     - defunctzombie.coreos-bootstrap
-
-- name: bootstrap rancheros hosts
-  hosts: rancheros
-  gather_facts: False
-  sudo: yes
-
-  tasks:
-     include: tasks/bootstrap_rancheros.yml

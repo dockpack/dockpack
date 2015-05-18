@@ -138,17 +138,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       virtualbox.name = "coreos"
     end
   end
-  
-  ## RancherOS Official: https://github.com/rancherio/os
-  config.vm.define :rancheros, autostart: true do |rancheros_config|
-    rancheros_config.vm.box  = "rancheros"
-    
-    rancheros_config.vm.network "forwarded_port", id: 'ssh', guest: 22, host: 2205, auto_correct: true
-    rancheros_config.ssh.username = "rancher"
-  
-    rancheros_config.vm.provider "virtualbox" do |virtualbox, override|
-      override.vm.box_url = "http://cdn.rancher.io/vagrant/x86_64/prod/rancheros_virtualbox.box"  
-      virtualbox.name = "rancheros"
-    end
-  end
+
 end
