@@ -141,8 +141,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   ## Kali linux
   config.vm.define "kali", autostart: false do |kali_config|
-    kali_config.vm.network "private_network", ip: "172.16.189.5", :adapter => 2, :mac => "080027f34a5d"
-    kali_config.vm.box = "kali-box"
+    kali_config.vm.box = "dockpack/kali"
+    kali_config.vm.box_url ="https://atlas.hashicorp.com/dockpack/boxes/kali"
+    kali_config.vm.network "forwarded_port", id: 'ssh', guest: 22, host: 2205, auto_correct: true
 
     kali_config.vm.provider "vmware_fusion" do |vmware|
       vmware.gui = true

@@ -59,10 +59,10 @@ packer/vmware-kali.box:
 	packer build --only=vmware-iso dockpack-kali.json
 
 virtualkali: packer/virtualbox-kali.box
-	vagrant box add --force kali packer/virtualbox-kali.box
+	vagrant box add --force dockpack/kali packer/virtualbox-kali.box 
 
 vmkali: packer/vmware-kali.box
-	vagrant box add --force kali packer/vmware-kali.box
+	vagrant box add --force dockpack/kali packer/vmware-kali.box
 
 # ---------------------------------------------------------
 fedora:
