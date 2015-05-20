@@ -1,0 +1,7 @@
+# it is suggested that these be encrypted with ansible-vault:
+# ansible-vault edit group_vars/windows.yml
+
+ansible_ssh_user: vagrant
+ansible_ssh_pass: vagrant
+ansible_ssh_port: 5986
+ansible_connection: winrm

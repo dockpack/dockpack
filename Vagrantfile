@@ -34,30 +34,30 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Apple OS X: Get a life, get a Mac! Implementation details for osx packer boxes:
   # https://github.com/boxcutter/osx
 
-  # Windows: You need to create a temporarily licenced Windows box with 'packer build win7ie10.json'
-  config.vm.define :windows_7, autostart: true do |windows_7_config|
-    windows_7_config.vm.box = "win7ie10"
-    windows_7_config.vm.communicator = "winrm"
+  # Windows: You need to create a temporarily licenced Windows box with 'packer build windows.json'
+  config.vm.define :windows, autostart: true do |windows_config|
+    windows_config.vm.box = "windows"
+    windows_config.vm.communicator = "winrm"
   
-    windows_7_config.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true
-    windows_7_config.vm.network :forwarded_port, guest: 22, host: 2200, id: "ssh", auto_correct: true
+    windows_config.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true
+    windows_config.vm.network :forwarded_port, guest: 22, host: 2200, id: "ssh", auto_correct: true
 
     # Admin user name and password
-    windows_7_config.winrm.username = "vagrant"
-    windows_7_config.winrm.password = "vagrant"
+    windows_config.winrm.username = "vagrant"
+    windows_config.winrm.password = "vagrant"
 
-    windows_7_config.vm.guest = :windows
-    windows_7_config.windows.halt_timeout = 15
+    windows_config.vm.guest = :windows
+    windows_config.windows.halt_timeout = 15
 
-    windows_7_config.vm.provider :virtualbox do |vb, override|
+    windows_config.vm.provider :virtualbox do |vb, override|
         vb.gui = true
-        vb.name = "win7ie10"
+        vb.name = "windows"
         vb.customize ["modifyvm", :id, "--memory", 2048]
         vb.customize ["modifyvm", :id, "--cpus", 2]
         vb.customize ["setextradata", "global", "GUI/SuppressMessages", "all" ]
     end
 
-    windows_7_config.vm.provider :vmware_fusion do |vm, override|
+    windows_config.vm.provider :vmware_fusion do |vm, override|
         #vm.gui = true
         vm.vmx["memsize"] = "2048"
         vm.vmx["numvcpus"] = "2"
@@ -67,7 +67,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         vm.vmx["scsi0.virtualDev"] = "lsisas1068"
     end
 
-    windows_7_config.vm.provider :vmware_workstation do |vm, override|
+    windows_config.vm.provider :vmware_workstation do |vm, override|
         #vm.gui = true
         vm.vmx["memsize"] = "2048"
         vm.vmx["numvcpus"] = "2"
@@ -138,4 +138,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
+  ## Kali linux
+  config.vm.define "kali", autostart: false do |kali_config|
+    kali_config.vm.network "private_network", ip: "172.16.189.5", :adapter => 2, :mac => "080027f34a5d"
+    kali_config.vm.box = "kali-box"
+
+    kali_config.vm.provider "vmware_fusion" do |vmware|
+      vmware.gui = true
+      vmware.vmx["memsize"] = "2048"
+      vmware.vmx["numvcpus"] = "2"
+    end
+    kali_config.vm.provider "virtualbox" do |vb|
+      vb.gui = true
+      vb.name = "kali"
+    end
+  end
 end
