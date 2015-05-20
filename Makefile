@@ -92,7 +92,7 @@ virtualwinvm: packer/virtualbox-windows.box
 windows: virtualwinvm
 	vagrant up windows
 
-centos6: virtualvm
+centos6: 
 	vagrant up centos6
 
 virtualbox: windows centos6
@@ -134,6 +134,6 @@ download:
 	http://cdimage.kali.org/kali-images/kali-1.0.9a/kali-linux-1.0.9a-amd64.iso \
 	|| mv ${DOWNLOADS}/kali-1.0.9a/kali-linux-1.0.9a-amd64.iso ${DOWNLOADS} || true
 
-demo: clean install virtualvm centos6 audit
+demo: centos6 audit
+all: clean install virtualvm centos6 audit
 
-all: centos6 fedora ubuntu
