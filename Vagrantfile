@@ -80,7 +80,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # Centos 6: Create the DISO STIG hardened centos6 box with 'packer build centos6.json'
   config.vm.define :centos6, autostart: true do |centos6_config|
-    centos6_config.vm.box = "centos6"  # to delete: 'vagrant destroy; box remove centos6'
+    centos6_config.vm.box = "dockpack/centos6"  # to delete: 'vagrant destroy; box remove centos6'
+    centos6_config.vm.box_url ="https://atlas.hashicorp.com/dockpack/boxes/centos6"
     centos6_config.vm.network "forwarded_port", id: 'ssh', guest: 22, host: 2201, auto_correct: true
    
     centos6_config.vm.provider "vmware_fusion" do |vmware|
