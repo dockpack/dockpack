@@ -63,7 +63,7 @@
           "<enter><wait10><wait10><wait10>",
           "<enter><wait>"
       ],
-      "boot_wait": "10s",
+      "boot_wait": "20s",
       "guest_os_type": "Debian_64",
       "headless": false,
       "http_directory": "kickstart",
