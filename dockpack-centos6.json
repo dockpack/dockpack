@@ -1,4 +1,7 @@
 {
+  "push": {
+    "name": "dockpack/centos6"
+  },
   "provisioners": [
     {
       "type": "shell",
@@ -47,6 +50,7 @@
       ],
       "iso_checksum_type": "md5",
       "iso_checksum": "2342bc5ea72fc028972aa0f21cee28b4",
+      "shutdown_command": "echo 'vagrant' | sudo -S /sbin/shutdown -h 0",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
       "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
@@ -82,6 +86,7 @@
       ],
       "iso_checksum_type": "md5",
       "iso_checksum": "2342bc5ea72fc028972aa0f21cee28b4",
+      "shutdown_command": "echo 'vagrant' | sudo -S /sbin/shutdown -h 0",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
       "ssh_wait_timeout": "10000s",
@@ -99,6 +104,26 @@
       "type": "vagrant",
       "keep_input_artifact": false,
       "output": "packer/{{.Provider}}-centos6.box"
+    },
+    {
+        "type": "atlas",
+        "only": ["vmware-iso"],
+        "artifact": "dockpack/centos6",
+        "artifact_type": "vagrant.box",
+        "metadata": {
+            "provider": "vmware_desktop",
+            "version": "0.0.1"
+        }
+    },
+    {
+        "type": "atlas",
+        "only": ["virtualbox-iso"],
+        "artifact": "dockpack/centos6",
+        "artifact_type": "vagrant.box",
+        "metadata": {
+            "provider": "virtualbox",
+            "version": "0.0.1"
+        }
     }
   ]
 }
