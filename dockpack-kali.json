@@ -68,10 +68,10 @@
       "headless": false,
       "http_directory": "kickstart",
       "iso_urls": [
-        "file:///tmp/kali-linux-1.1.0a-amd64.iso",
-        "http://cdimage.kali.org/kali-1.1.0a/kali-linux-1.1.0a-amd64.iso"
+        "file:///tmp/kali-linux-1.0.9a-amd64.iso",
+        "http://cdimage.kali.org/kali-images/kali-1.0.9a/kali-linux-1.0.9a-amd64.iso"
       ],
-      "iso_checksum": "2b8d2db20e2709c5e9e0f9f9bbd8606c9b9e729f",
+      "iso_checksum": "2744d50f56c3d6332bc75e676f36aad3058d0aad",
       "iso_checksum_type": "sha1",
       "shutdown_command": "echo 'vagrant' | sudo -S /sbin/shutdown -h 0",
       "ssh_password": "vagrant",
