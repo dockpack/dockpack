@@ -12,12 +12,14 @@
   roles:
     - issue
     - loghost
+    - bbaassssiiee.commoncentos
     - geerlingguy.java
     - pcextreme.mariadb
     - { role: RHEL6-STIG, rhel6stig_cat2: true, rhel6stig_cat3: true, rhel6stig_is_mail_relay: true }
 
   tasks:
     - include: tasks/dockpack.yml
+
 ### Ubuntu
 - name: bootstrap ubuntu hosts
   hosts: ubuntu
@@ -34,7 +36,7 @@
     - geerlingguy.java
     - ansible-maven
     - ansible-ant
-#    - ansible-eclipse
+    - ansible-eclipse
 
   tasks:
     - include: tasks/dockpack.yml
