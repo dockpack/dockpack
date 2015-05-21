@@ -52,7 +52,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     windows_config.windows.halt_timeout = 15
 
     windows_config.vm.provider :virtualbox do |vb, override|
-        vb.gui = true
+        # Use Remote Desktop Protocol
+        vb.gui = false
         vb.name = "windows"
         vb.customize ["modifyvm", :id, "--memory", 2048]
         vb.customize ["modifyvm", :id, "--cpus", 2]
