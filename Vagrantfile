@@ -1,5 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
+# To use these virtual machine install Vagrant and VirtuaBox or VMWare.
+# vagrant up [centos6|fedora21|kalu|ubuntu41|coreos|windows]
 
 VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -156,3 +158,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 end
+
