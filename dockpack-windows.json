@@ -35,6 +35,8 @@
         "./scripts/win-updates.ps1",
         "./scripts/openssh.ps1",
         "./scripts/oracle-cert.cer",
+        "./scripts/chocolatey.bat",
+        "./scripts/chocopacks.bat",
         "./scripts/upgrade_to_ps3.ps1",
         "./scripts/ConfigureRemotingForAnsible.ps1"
       ],
