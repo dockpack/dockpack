@@ -8,14 +8,16 @@
 
   vars_files:
     - "group_vars/centos6"
+  pre_tasks:
+    - include: roles/bbaassssiiee.commoncentos/tasks/stig.yml
 
   roles:
-    - issue
-    - loghost
     - bbaassssiiee.commoncentos
+    - loghost
+    - { role: RHEL6-STIG, rhel6stig_cat2: true, rhel6stig_cat3: true, rhel6stig_is_mail_relay: true }
+    - issue
     - geerlingguy.java
     - pcextreme.mariadb
-    - { role: RHEL6-STIG, rhel6stig_cat2: true, rhel6stig_cat3: true, rhel6stig_is_mail_relay: true }
 
   tasks:
     - include: tasks/dockpack.yml
