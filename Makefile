@@ -99,6 +99,14 @@ virtualbox: windows centos6
 
 vmware: vmwarevm
 
+
+boxes: 
+	packer build -only=virtualbox-iso dockpack-centos6.json
+	packer build -only=virtualbox-iso dockpack-kali.json
+	packer build -only=virtualbox-iso dockpack-windows.json
+	packer build -only=virtualbox-iso dockpack-fedora21.json
+
+
 up: virtualbox
 
 clean:
