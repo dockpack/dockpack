@@ -13,6 +13,7 @@ install:
 	(cd ansible && ansible-galaxy install --force -r requirements.yml)
 	@echo installing python extensions for windows provisioning
 	pip install --upgrade -r ansible/requirements.pip
+	cp downloads/* /tmp
 audit:	
 	ansible-playbook --private-key=pki/vagrant.rsa -i ansible/inventory/ansible.ini -l centos6 ansible/security_audit.yml
 	open file:///tmp/rhel-stig-report.html
