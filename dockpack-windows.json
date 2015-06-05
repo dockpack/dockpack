@@ -8,9 +8,11 @@
         "./scripts/vm-guest-tools.bat",
         "./scripts/vagrant-ssh.bat",
         "./scripts/enable-rdp.bat",
-        "./scripts/dis-updates.ps1",
-        "./scripts/microsoft-updates.bat",
-        "./scripts/win-updates.ps1"
+        "./scripts/openssh.ps1",
+        "./scripts/chocolatey.bat",
+        "./scripts/chocopacks.bat",
+        "./scripts/upgrade_to_ps3.ps1",
+        "./scripts/ConfigureRemotingForAnsible.ps1"
       ]
     }
   ],
