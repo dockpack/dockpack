@@ -1,5 +1,6 @@
 
     - name: 'yum: ensure packages are installed'
+      when: ansible_os_family == "RedHat"
       yum: name={{ item }} state=installed
       with_items:
         - wget
@@ -8,7 +9,37 @@
         - curl
         - unzip
         - make
-        - docker
+
+    - name: 'apt-get: ensure packages are installed'
+      when: ansible_os_family == 'Debian'
+      apt: name={{ item }} state=installed
+      with_items:
+        - wget
+        - git
+        - ansible
+        - curl
+        - unzip
+        - make
+
+    - name: 'apt-get: ensure packages are installed'
+      when: ansible_os_family == 'Debian'
+      apt: name=docker state=installed
+
+    - name: 'yum: ensure docker can be installed'
+      when: ansible_os_family == "RedHat" and ansible_distribution_version == "6.6"
+      yum: name=docker state=absent
+
+    - name: 'yum: ensure docker-io is installed'
+      when: ansible_os_family == "RedHat" and ansible_distribution_version == "6.6"
+      yum: name=docker-io state=installed
+
+    - name: 'yum: ensure docker is installed'
+      when: ansible_os_family == "RedHat" and ansible_distribution_major_version == "7"
+      yum: name=docker state=installed
+
+    - name: 'yum: ensure docker is installed'
+      when: ansible_distribution == "Fedora" and ansible_distribution_major_version >= "20"
+      yum: name=docker state=installed
 
     - name: 'group: ensure the dockerroot is present'
       group: name=dockerroot gid=991 state=present system=yes
@@ -21,6 +52,7 @@
       service: name=docker enabled=true
 
     - name: 'configure /etc/sysconfig/docker'
+      when: ansible_os_family == "RedHat"
       lineinfile: state=present backup=no dest=/etc/sysconfig/docker regexp='^OPTIONS' line="OPTIONS='--selinux-enabled --group=dockerroot'"
 
     - name: 'start docker'
