@@ -21,6 +21,8 @@ rhel6stig_cat3: true
 rhel6stig_fullauto: true
 rhel6stig_use_dhcp: false
 stig_benchmark: 'U_RedHat_6_V1R6_STIG_SCAP_1-1_Benchmark.zip'
+java_benchmark: 'u_jre7_v1r5_stig.zip'
+apache_benchmark: 'U_Apache_2-2_UNIX_V1R6_STIG.zip'
 
 rhel6stig_auditd_config:
   # V-38464 - compliant options SYSLOG|EXEC|SINGLE|HALT
@@ -46,9 +48,9 @@ rhel6stig_auditd_config:
   # something else entirely.
   # NOTE: SINGLE user mode setting will break cloud systems.
   admin_space_left_action: SINGLE
-  # 
-  # 2    Tells your system to perform an immediate shutdown without 
-  #      flushing any pending data to disk when the limits of your 
+  #
+  # 2    Tells your system to perform an immediate shutdown without
+  #      flushing any pending data to disk when the limits of your
   #      audit system are exceeded. Because this shutdown is not a clean shutdown.
   #      restrict the use of -f 2 to only the most security conscious environments
   # 1    System continues to run, issues a warning and audit stops.
