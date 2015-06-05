@@ -7,7 +7,10 @@
       "scripts": [
         "./scripts/vm-guest-tools.bat",
         "./scripts/vagrant-ssh.bat",
-        "./scripts/enable-rdp.bat"
+        "./scripts/enable-rdp.bat",
+        "./scripts/dis-updates.ps1",
+        "./scripts/microsoft-updates.bat",
+        "./scripts/win-updates.ps1"
       ]
     }
   ],
@@ -20,7 +23,7 @@
       ],
       "iso_checksum_type": "md5",
       "iso_checksum": "1d0d239a252cb53e466d39e752b17c28",
-      "headless": true,
+      "headless": false,
       "boot_wait": "2m",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
