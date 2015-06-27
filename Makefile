@@ -14,7 +14,7 @@ install:
 	@echo installing python extensions for windows provisioning
 	pip install --upgrade -r ansible/requirements.pip
 	cp downloads/* /tmp
-audit:	
+audit:
 	ansible-playbook --private-key=pki/vagrant.rsa -i ansible/inventory/ansible.ini -l centos6 ansible/security_audit.yml
 	open file:///tmp/rhel-stig-report.html
 # ---------------------------------------------------------
@@ -35,20 +35,20 @@ vmwarevm: packer/vmware-centos6.box
 
 # ---------------------------------------------------------
 
-packer/virtualbox-fedora21.box:
-	packer validate dockpack-fedora21.json
-	packer build -only=virtualbox-iso dockpack-fedora21.json
+packer/virtualbox-fedora22.box:
+	packer validate dockpack-fedora22.json
+	packer build -only=virtualbox-iso dockpack-fedora22.json
 
-packer/vmware-fedora21.box:
-	packer validate dockpack-fedora21.json
-	packer build --only=vmware-iso dockpack-fedora21.json
+packer/vmware-fedora22.box:
+	packer validate dockpack-fedora22.json
+	packer build --only=vmware-iso dockpack-fedora22.json
 
 
-virtualfedora: packer/virtualbox-fedora21.box
-	vagrant box add --force fedora21 packer/virtualbox-fedora21.box
+virtualfedora: packer/virtualbox-fedora22.box
+	vagrant box add --force fedora22 packer/virtualbox-fedora22.box
 
-vmfedora: packer/vmware-fedora21.box
-	vagrant box add --force fedora21 packer/vmware-fedora21.box
+vmfedora: packer/vmware-fedora22.box
+	vagrant box add --force fedora22 packer/vmware-fedora22.box
 # ---------------------------------------------------------
 
 packer/virtualbox-kali.box:
@@ -60,14 +60,14 @@ packer/vmware-kali.box:
 	packer build --only=vmware-iso dockpack-kali.json
 
 virtualkali: packer/virtualbox-kali.box
-	vagrant box add --force dockpack/kali packer/virtualbox-kali.box 
+	vagrant box add --force dockpack/kali packer/virtualbox-kali.box
 
 vmkali: packer/vmware-kali.box
 	vagrant box add --force dockpack/kali packer/vmware-kali.box
 
 # ---------------------------------------------------------
 fedora:
-	vagrant up fedora21
+	vagrant up fedora22
 
 ubuntu:
 	vagrant up ubuntu14
@@ -93,7 +93,7 @@ virtualwinvm: packer/virtualbox-windows.box
 windows: virtualwinvm
 	vagrant up windows
 
-centos6: 
+centos6:
 	vagrant up centos6
 
 virtualbox: windows centos6
@@ -101,11 +101,11 @@ virtualbox: windows centos6
 vmware: vmwarevm
 
 
-boxes: 
+boxes:
 	packer build -only=virtualbox-iso dockpack-centos6.json
 	packer build -only=virtualbox-iso dockpack-kali.json
 	packer build -only=virtualbox-iso dockpack-windows.json
-	packer build -only=virtualbox-iso dockpack-fedora21.json
+	packer build -only=virtualbox-iso dockpack-fedora22.json
 
 
 up: virtualbox

@@ -4,9 +4,8 @@
   user: vagrant
   sudo: yes
 
-  pre_tasks:
-    - include: roles/bbaassssiiee.commoncentos/tasks/stig.yml
+- include: rhel6.yml
+  when: ansible_os_family == 'RedHat' and ansible_distribution_major_version|int <= 7
 
-  roles:
-    - bbaassssiiee.commoncentos
-    - { role: RHEL6-STIG, rhel6stig_cat2: true, rhel6stig_cat3: true, rhel6stig_is_mail_relay: true }
+- include: fedora.yml
+  when: ansible_distribution == 'Fedora'

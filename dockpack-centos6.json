@@ -10,13 +10,13 @@
         "virtualbox-iso": {
           "scripts": [
             "scripts/virtualbox.sh",
-            "scripts/ansible.sh"
+            "scripts/ansible-centos.sh"
           ]
         },
         "vmware-iso": {
           "scripts": [
             "scripts/vmware.sh",
-            "scripts/ansible.sh"
+            "scripts/ansible-centos.sh"
           ]
         }
       }
