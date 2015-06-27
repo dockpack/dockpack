@@ -44,16 +44,12 @@
 
 ### fedora
 - name: bootstrap fedora hosts
-  hosts: fedora21
+  hosts: fedora22
   gather_facts: True
   sudo: yes
 
   roles:
     - issue
-
-  tasks:
-    - include: tasks/install_docker.yml
-    - include: tasks/dockpack.yml
 
 - name: bootstrap coreos hosts
   hosts: coreos
