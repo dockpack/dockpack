@@ -104,26 +104,6 @@
       "type": "vagrant",
       "keep_input_artifact": false,
       "output": "packer/{{.Provider}}-centos6.box"
-    },
-    {
-        "type": "atlas",
-        "only": ["vmware-iso"],
-        "artifact": "dockpack/centos6",
-        "artifact_type": "vagrant.box",
-        "metadata": {
-            "provider": "vmware_desktop",
-            "version": "0.0.1"
-        }
-    },
-    {
-        "type": "atlas",
-        "only": ["virtualbox-iso"],
-        "artifact": "dockpack/centos6",
-        "artifact_type": "vagrant.box",
-        "metadata": {
-            "provider": "virtualbox",
-            "version": "0.0.1"
-        }
     }
   ]
 }
