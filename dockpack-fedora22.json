@@ -88,7 +88,7 @@
     {
       "type": "vagrant",
       "keep_input_artifact": true,
-      "output": "packer/{{.Provider}}-centos6.box"
+      "output": "packer/{{.Provider}}-fedora22.box"
     }
   ]
 }
