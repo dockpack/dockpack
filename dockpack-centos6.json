@@ -23,7 +23,7 @@
     },
     {
       "type": "ansible-local",
-      "playbook_file": "ansible/packer.yml",
+      "playbook_file": "ansible/rhel6.yml",
       "role_paths": [
         "ansible/roles/bbaassssiiee.commoncentos",
         "ansible/roles/RHEL6-STIG"
