@@ -3,8 +3,5 @@ Jinja2
 paramiko
 pycrypto
 PyYAML
-requests
-selenium
-kerberos
 wsgiref
 http://github.com/diyan/pywinrm/archive/master.zip#egg=pywinrm
