@@ -11,7 +11,7 @@ help:
 
 install:
 	(cd ansible && ansible-galaxy install --force -r requirements.yml)
-	@echo installing python extensions for windows provisioning
+	@echo installing python extensions for provisioning
 	pip install --upgrade -r ansible/requirements.pip
 	cp downloads/* /tmp
 audit:
@@ -79,24 +79,11 @@ kali:
 	vagrant up kali
 # ---------------------------------------------------------
 
-packer/virtualbox-windows.box:
-	packer validate dockpack-windows.json
-	packer build -only=virtualbox-iso dockpack-windows.json
-
-packer/vmware-windows.box:
-	packer validate dockpack-windows.json
-	packer build --only=vmware-iso dockpack-windows.json
-
-virtualwinvm: packer/virtualbox-windows.box
-	vagrant box add --force windows packer/virtualbox-windows.box
-
-windows: virtualwinvm
-	vagrant up windows
 
 centos6:
 	vagrant up centos6
 
-virtualbox: windows centos6
+virtualbox: centos6
 
 vmware: vmwarevm
 
@@ -104,7 +91,6 @@ vmware: vmwarevm
 boxes:
 	packer build -only=virtualbox-iso dockpack-centos6.json
 	packer build -only=virtualbox-iso dockpack-kali.json
-	packer build -only=virtualbox-iso dockpack-windows.json
 	packer build -only=virtualbox-iso dockpack-fedora22.json
 
 
