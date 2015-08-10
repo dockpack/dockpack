@@ -53,6 +53,7 @@
       "shutdown_command": "echo 'vagrant' | sudo -S /sbin/shutdown -h 0",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
+      "ssh_wait_timeout": "20m",
       "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
       "virtualbox_version_file": ".vbox_version",
       "vm_name": "centos6",
@@ -89,7 +90,7 @@
       "shutdown_command": "echo 'vagrant' | sudo -S /sbin/shutdown -h 0",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
-      "ssh_wait_timeout": "10000s",
+      "ssh_wait_timeout": "20m",
       "tools_upload_flavor": "linux",
       "vm_name": "centos6",
       "vmx_data": {
