@@ -20,7 +20,9 @@ rhel6stig_cat2: true
 rhel6stig_cat3: true
 rhel6stig_fullauto: true
 rhel6stig_use_dhcp: false
-stig_benchmark: 'U_RedHat_6_V1R6_STIG_SCAP_1-1_Benchmark.zip'
+stig_benchmark: 'U_RedHat_6_V1R8_STIG_SCAP_1-1_Benchmark.zip'
+stig_baseurl: 'http://iasecontent.disa.mil/stigs/zip/July2015'
+
 java_benchmark: 'u_jre7_v1r5_stig.zip'
 apache_benchmark: 'U_Apache_2-2_UNIX_V1R6_STIG.zip'
 
