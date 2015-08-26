@@ -30,20 +30,22 @@
   - name: 'ensure absense of STIG_SCAP rhel-stig-report.html file'
     file: dest=/root/rhel-stig-report.html state=absent
 
-  - name: 'download from http://iase.disa.mil/stigs/Documents'
-    get_url: url=http://iase.disa.mil/stigs/Documents/{{stig_benchmark}}
-             dest=/tmp/{{stig_benchmark}}
+  - name: 'download from http://iase.disa.mil/'
+    get_url: url={{stig_baseurl}}/{{stig_benchmark}} dest=/tmp/{{stig_benchmark}}
 
   - name: 'unzip Security Content Automation Protocol (SCAP) Content and Tools'
     command: unzip -o /tmp/{{stig_benchmark}}
 
+  - name: 'make this benchmark work for Centos instead of RHEL'
+    shell: "perl -pi -e 's/redhat:enterprise_linux/centos:centos/;' *"
+
   - name: 'run the SCAP tool and create rhel-stig-report.html'
     command: "oscap xccdf eval \
-      --profile MAC-3_Classified \
+      --profile MAC-1_Sensitive \
       --results /root/results.xml \
       --report /root/rhel-stig-report.html \
-      --cpe U_RedHat_6_V1R6_STIG_SCAP_1-1_Benchmark-cpe-dictionary.xml \
-      U_RedHat_6_V1R6_STIG_SCAP_1-1_Benchmark-xccdf.xml"
+      --cpe U_RedHat_6_V1R8_STIG_SCAP_1-1_Benchmark-cpe-dictionary.xml \
+      U_RedHat_6_V1R8_STIG_SCAP_1-1_Benchmark-xccdf.xml"
     no_log: yes
     ignore_errors: yes
 
