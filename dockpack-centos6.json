@@ -39,17 +39,17 @@
     {
       "type": "virtualbox-iso",
       "boot_command": [
-        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-6.6-x86_64-noX.cfg<enter><wait>"
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-6.7-x86_64-noX.cfg<enter><wait>"
       ],
       "guest_os_type": "RedHat_64",
       "headless": false,
       "http_directory": "kickstart",
       "iso_urls": [
-        "file:///tmp/CentOS-6.6-x86_64-netinstall.iso",
-        "http://www.mirrorservice.org/sites/mirror.centos.org/6/isos/x86_64/CentOS-6.6-x86_64-netinstall.iso"
+        "file:///tmp/CentOS-6.7-x86_64-netinstall.iso",
+        "http://www.mirrorservice.org/sites/mirror.centos.org/6/isos/x86_64/CentOS-6.7-x86_64-netinstall.iso"
       ],
       "iso_checksum_type": "md5",
-      "iso_checksum": "2342bc5ea72fc028972aa0f21cee28b4",
+      "iso_checksum": "171ce654ec06040d096daf75934ca8ca",
       "shutdown_command": "echo 'vagrant' | sudo -S /sbin/shutdown -h 0",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
@@ -75,18 +75,18 @@
     {
       "type": "vmware-iso",
       "boot_command": [
-        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-6.6-x86_64-noX.cfg<enter><wait>"
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-6.7-x86_64-noX.cfg<enter><wait>"
       ],
       "boot_wait": "20s",
       "guest_os_type": "centos-64",
       "headless": false,
       "http_directory": "kickstart",
       "iso_urls": [
-        "file:///tmp/CentOS-6.6-x86_64-netinstall.iso",
-        "http://www.mirrorservice.org/sites/mirror.centos.org/6/isos/x86_64/CentOS-6.6-x86_64-netinstall.iso"
+        "file:///tmp/CentOS-6.7-x86_64-netinstall.iso",
+        "http://www.mirrorservice.org/sites/mirror.centos.org/6/isos/x86_64/CentOS-6.7-x86_64-netinstall.iso"
       ],
       "iso_checksum_type": "md5",
-      "iso_checksum": "2342bc5ea72fc028972aa0f21cee28b4",
+      "iso_checksum": "171ce654ec06040d096daf75934ca8ca",
       "shutdown_command": "echo 'vagrant' | sudo -S /sbin/shutdown -h 0",
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
