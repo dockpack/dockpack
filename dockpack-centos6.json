@@ -77,7 +77,7 @@
       "boot_command": [
         "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-6.7-x86_64-noX.cfg<enter><wait>"
       ],
-      "boot_wait": "20s",
+      "boot_wait": "30s",
       "guest_os_type": "centos-64",
       "headless": false,
       "http_directory": "kickstart",
