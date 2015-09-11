@@ -1,5 +1,5 @@
 VAGRANT_DEFAULT_PROVIDER=virtualbox
-DOWNLOADS=/tmp/
+DOWNLOADS=downloads
 
 help:
 	@echo 'Usage:'
@@ -113,13 +113,8 @@ realclean:
 # dockpack uses packer to build Centos and Windows. Create a local cache in downloads
 download:
 	@wget --limit-rate=10m --tries=10 --retry-connrefused --waitretry=180 --directory-prefix=${DOWNLOADS} --no-clobber \
-	http://care.dlservice.microsoft.com/dl/download/evalx/win7/x64/EN/7600.16385.090713-1255_x64fre_enterprise_en-us_EVAL_Eval_Enterprise-GRMCENXEVAL_EN_DVD.iso \
-	|| mv  downloads/7600.16385.090713-1255_x64fre_enterprise_en-us_EVAL_Eval_Enterprise-GRMCENXEVAL_EN_DVD.iso ${DOWNLOADS} || true
-
-	@wget --limit-rate=10m --tries=10 --retry-connrefused --waitretry=180 --directory-prefix=${DOWNLOADS} --no-clobber \
-	http://www.mirrorservice.org/sites/mirror.centos.org/6/isos/x86_64/CentOS-6.6-x86_64-netinstall.iso \
-	|| mv ${DOWNLOADS}/CentOS-6.6-x86_64-netinstall.iso ${DOWNLOADS} || true
-
+	http://www.mirrorservice.org/sites/mirror.centos.org/6/isos/x86_64/CentOS-6.7-x86_64-netinstall.iso \
+	|| mv ${DOWNLOADS}/CentOS-6.7-x86_64-netinstall.iso ${DOWNLOADS} || true
 
 	@wget --limit-rate=10m --tries=10 --retry-connrefused --waitretry=180 --directory-prefix=${DOWNLOADS} --no-clobber \
 	http://www.mirrorservice.org/sites/download.fedora.redhat.com/pub/fedora/linux/releases/21/Server/x86_64/iso/Fedora-Server-netinst-x86_64-21.iso \
