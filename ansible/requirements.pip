@@ -4,4 +4,3 @@ paramiko
 pycrypto
 PyYAML
 wsgiref
-http://github.com/diyan/pywinrm/archive/master.zip#egg=pywinrm
