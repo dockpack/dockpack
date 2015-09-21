@@ -18,7 +18,6 @@
     - issue
 
   tasks:
-    - include: tasks/install_docker.yml
     - include: tasks/dockpack.yml
 
 ### Ubuntu
