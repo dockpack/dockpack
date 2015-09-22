@@ -4,13 +4,13 @@
       "type": "virtualbox-iso",
         "boot_command": [
           "<esc><wait>",
-          "install ", 
+          "install ",
           "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kali.cfg ",
           "debian-installer=en_US auto locale=en_US kbd-chooser/method=us <wait>",
           "netcfg/get_hostname={{ .Name }} ",
           "netcfg/get_domain=vagrantup.com ",
           "fb=false debconf/frontend=noninteractive ",
-          "console-setup/ask_detect=false <wait>", 
+          "console-setup/ask_detect=false <wait>",
           "console-keymaps-at/keymap=us ",
           "keyboard-configuration/xkb-keymap=us <wait>",
           "<enter><wait10><wait10><wait10>",
@@ -21,10 +21,10 @@
       "headless": false,
       "http_directory": "kickstart",
       "iso_urls": [
-        "file:///tmp/kali-linux-1.0.9a-amd64.iso",
-        "http://cdimage.kali.org/kali-images/kali-1.0.9a/kali-linux-1.0.9a-amd64.iso"
+        "file:///tmp/kali-linux-2.0-amd64.iso",
+        "http://cdimage.kali.org/kali-2.0/kali-linux-2.0-amd64.iso"
       ],
-      "iso_checksum": "2744d50f56c3d6332bc75e676f36aad3058d0aad",
+      "iso_checksum": "aaeb89a78f155377282f81a785aa1b38ee5f8ba0",
       "iso_checksum_type": "sha1",
       "shutdown_command": "echo 'vagrant' | sudo -S /sbin/shutdown -h 0",
       "ssh_password": "vagrant",
@@ -51,13 +51,13 @@
       "type": "vmware-iso",
       "boot_command": [
           "<esc><wait>",
-          "install ", 
+          "install ",
           "preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/kali.cfg ",
           "debian-installer=en_US auto locale=en_US kbd-chooser/method=us <wait>",
           "netcfg/get_hostname={{ .Name }} ",
           "netcfg/get_domain=vagrantup.com ",
           "fb=false debconf/frontend=noninteractive ",
-          "console-setup/ask_detect=false <wait>", 
+          "console-setup/ask_detect=false <wait>",
           "console-keymaps-at/keymap=us ",
           "keyboard-configuration/xkb-keymap=us <wait>",
           "<enter><wait10><wait10><wait10>",
@@ -68,10 +68,10 @@
       "headless": false,
       "http_directory": "kickstart",
       "iso_urls": [
-        "file:///tmp/kali-linux-1.0.9a-amd64.iso",
-        "http://cdimage.kali.org/kali-images/kali-1.0.9a/kali-linux-1.0.9a-amd64.iso"
+        "file:///tmp/kali-linux-2.0-amd64.iso",
+        "http://cdimage.kali.org/kali-2.0/kali-linux-2.0-amd64.iso"
       ],
-      "iso_checksum": "2744d50f56c3d6332bc75e676f36aad3058d0aad",
+      "iso_checksum": "aaeb89a78f155377282f81a785aa1b38ee5f8ba0",
       "iso_checksum_type": "sha1",
       "shutdown_command": "echo 'vagrant' | sudo -S /sbin/shutdown -h 0",
       "ssh_password": "vagrant",
@@ -83,9 +83,9 @@
         "memsize": "512",
         "numvcpus": "2"
       }
-    } 
+    }
   ],
-  "post-processors": [  
+  "post-processors": [
     {
     "type": "vagrant",
     "keep_input_artifact": false,
