@@ -26,11 +26,11 @@
       apt: name=docker state=installed
 
     - name: 'yum: ensure docker can be installed'
-      when: ansible_os_family == "RedHat" and ansible_distribution_version == "6.6"
+      when: ansible_os_family == "RedHat" and ansible_distribution_version == "6.7"
       yum: name=docker state=absent
 
     - name: 'yum: ensure docker-io is installed'
-      when: ansible_os_family == "RedHat" and ansible_distribution_version == "6.6"
+      when: ansible_os_family == "RedHat" and ansible_distribution_version == "6.7"
       yum: name=docker-io state=installed
 
     - name: 'yum: ensure docker is installed'
