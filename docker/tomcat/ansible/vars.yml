@@ -1,0 +1,14 @@
+
+ansible_os_family: RedHat
+
+tomcat_java_home: /usr/lib/jvm/jre
+tomcat_minor: 62
+tomcat_version: v7.0.{{tomcat_minor}}
+tomcat_download_prefix: "http://archive.apache.org/dist/tomcat/tomcat-7/{{ tomcat_version }}/bin"
+tomcat_list:
+  v7.0.62:
+    filename: 'apache-tomcat-7.0.{{tomcat_minor}}.tar.gz'
+    dirname: 'apache-tomcat-7.0.{{tomcat_minor}}'
+tomcat_apps_dir: "/opt/{{ tomcat_list[tomcat_version]['dirname'] }}"
+
+user: tomcat
