@@ -1,0 +1,55 @@
+---
+- name: "create install directory"
+  action: file path={{tomcat_install_dir }} state=directory
+  tags: [ tomcat, setup ]
+
+- name: "download tar.gz file"
+  action: get_url url={{ tomcat_download_prefix }}/{{ tomcat_list[tomcat_version]['filename'] }} dest={{ tomcat_download_dir }}/apache-tomcat.tar.gz force=yes
+
+- name: "unpack tomcat"
+  action: shell creates={{ tomcat_install_dir }}/{{ tomcat_list[tomcat_version]['dirname'] }} tar -C {{ tomcat_install_dir }} -xzf {{ tomcat_download_dir }}/apache-tomcat.tar.gz
+  tags: [ tomcat, setup ]
+
+- name: "remove install file"
+  action: file path={{ tomcat_download_dir }}/apache-tomcat.tar.gz state=absent
+  tags: [ tomcat, setup ]
+
+- name: "create link"
+  action: file src={{ tomcat_install_dir }}/{{ tomcat_list[tomcat_version]['dirname'] }} dest={{ tomcat_install_dir }}/apache-tomcat state=link
+  tags: [ tomcat, setup ]
+
+- name: "creating webapps dir"
+  action: file path={{ item }} state=directory mode=750
+  with_items:
+    - "{{ tomcat_apps_dir }}/work"
+    - "{{ tomcat_apps_dir }}/webapps"
+    - "{{ tomcat_apps_dir }}/logs"
+    - "{{ tomcat_apps_dir }}/temp"
+  tags: [ tomcat, setup ]
+
+- name: "copy extra libs"
+  action: get_url url={{ tomcat_download_prefix }}/{{ item.src }} dest={{ tomcat_install_dir }}/{{ tomcat_list[tomcat_version]['dirname'] }}/{{ item.dest }} force=yes
+  with_items: tomcat_extra_libs
+  when: "item.state == 'enabled'"
+  tags: [ tomcat, setup ]
+
+- name: "remove extra libs"
+  action: file path={{ tomcat_install_dir }}/{{ tomcat_list[tomcat_version]['dirname'] }}/{{ item.dest }} state=absent
+  with_items: tomcat_extra_libs
+  when: "item.state != 'enabled'"
+  tags: [ tomcat, setup ]
+
+- name: "[tomcat] create system group"
+  action: group name={{ tomcat_group }} system=yes state=present
+  tags: [ tomcat, setup ]
+
+- name: "[tomcat] create system user"
+  action: user name={{ tomcat_user }} system=yes state=present createhome=no home=/opt/apache-tomcat group={{ tomcat_group }} shell=/bin/false
+  tags: [ tomcat, setup ]
+
+- name: "change directory permissions"
+  action: file path={{ item }} owner={{ tomcat_user }} group={{ tomcat_group }} state=directory recurse=yes
+  with_items:
+    - "{{ tomcat_install_dir }}/{{ tomcat_list[tomcat_version]['dirname'] }}"
+    - "{{ tomcat_apps_dir }}"
+  tags: [ tomcat, setup ]

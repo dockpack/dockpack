@@ -1,0 +1,12 @@
+---
+- hosts: docker
+  connection: local
+  user: root
+  gather_facts: False
+
+  vars_files:
+    - vars.yml
+
+  roles:
+    - geerlingguy.java
+    - hudecof.tomcat

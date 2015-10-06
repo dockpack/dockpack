@@ -1,0 +1,10 @@
+# {{ ansible_managed }}
+
+/opt/apache-tomcat/logs/catalina.out { 
+        copytruncate 
+        weekly
+        rotate 10
+        compress
+        delaycompress 
+        missingok 
+}

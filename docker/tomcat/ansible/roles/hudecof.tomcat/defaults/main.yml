@@ -1,0 +1,42 @@
+---
+# defaults file for apache-tomcat
+
+tomcat_user: tomcat
+tomcat_group: tomcat
+
+# list of available tomcat versions on the {{ java_downoad_prefix }} site
+tomcat_list: []
+
+# tomcat version from the {{ tomcat_list }} keys
+tomcat_version:
+
+# where to unpact the tomcat tar.gz
+tomcat_install_dir: /opt
+
+# where to download tomcat tar.gz
+tomcat_download_dir: /tmp
+
+# location where is the tomcat tar.gz located
+# full name from {{ tomcat_version }} will be appened
+tomcat_download_prefix:
+
+# tomcat application directory /webapps, work/
+tomcat_apps_dir: /srv/apache-tomcat
+
+# list of extra libs to be included in the instalation
+tomcat_extra_libs: []
+
+# list of extra libs to be included in the instalation
+tomcat_extra_conf: []
+
+# where to lookup for include and scripts
+# defaults in role directory
+tomcat_dir_prefix: .
+
+tomcat_service_enabled: yes
+tomcat_service_state: started
+
+tomcat_catalina_opts: []
+tomcat_java_opts: []
+tomcat_java_home:
+tomcat_config_template: default

@@ -1,0 +1,23 @@
+# tasks file for java
+
+- name: Add the OS specific varibles
+  include_vars: "{{ ansible_os_family }}.yml"
+  tags:
+    - tomcat
+    - setup
+    - config
+    - service
+
+# Debian(setup) specific tasks
+- include: setup-Debian.yml
+  when: "ansible_os_family == 'Debian'"
+
+# RedHat(setup) specific tasks
+- include: setup-RedHat.yml
+  when: "ansible_os_family == 'RedHat'"
+
+- include: setup-common.yml
+- include: config.yml
+- include: service.yml
+
+

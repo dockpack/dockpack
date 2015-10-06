@@ -1,0 +1,59 @@
+#!/bin/sh 
+
+# {{ ansible_managed }}
+
+# tomcat          Start up the Apache Tomcat server daemon
+#
+# chkconfig: 2345 55 25
+# description: Apache Tomcat is an aplication server fomr java based aplication.
+
+### BEGIN INIT INFO 
+# Provides: tomcat 
+# Required-Start: $local_fs $remote_fs $network 
+# Required-Stop: $local_fs $remote_fs $network 
+# Should-Start: $named # Should-Stop: $named 
+# Default-Start: 2 3 4 5 
+# Default-Stop: 0 1 6 
+# Short-Description: Start Tomcat Server 
+# Description: Start the Tomcat Server 
+### END INIT INFO 
+
+# customize values for your needs 
+
+TOMCAT_USER={{ tomcat_user }}
+TOMCAT_PATH={{ tomcat_install_dir }}/apache-tomcat
+{% if tomcat_java_home|length %}
+export JAVA_HOME={{tomcat_java_home }}
+{% endif %} 
+
+start() { 
+        if [ -f $TOMCAT_PATH/bin/startup.sh ]; then 
+                echo -n "Starting Tomcat\n" 
+                /bin/su $TOMCAT_USER -s /bin/bash -c "$TOMCAT_PATH/bin/startup.sh"
+        fi 
+} 
+
+stop() { 
+        if [ -f $TOMCAT_PATH/bin/shutdown.sh ]; then 
+                echo -n "Stopping Tomcat\n" 
+                /bin/su $TOMCAT_USER -s /bin/bash -c "$TOMCAT_PATH/bin/shutdown.sh -force" 
+        fi 
+}
+
+case "$1" in 
+        'start') 
+                start 
+                ;; 
+        'stop') 
+                stop 
+                ;; 
+        'restart') 
+                stop
+                start 
+                ;; 
+        *) 
+                echo "Usage: $0 { start | stop | restart}" 
+                ;; 
+esac 
+
+exit 0 

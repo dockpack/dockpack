@@ -1,0 +1,12 @@
+# {{ ansible_managed }}
+CATALINA_PID="{{ tomcat_apps_dir }}/catalina.pid"
+CATALINA_TMPDIR="{{ tomcat_apps_dir }}/temp"
+
+CATALINA_OPTS=" \
+        ${CATALINA_OPTS} \
+        {{ tomcat_catalina_opts | join(" \\\n\t")}}"
+
+JAVA_OPTS=" \
+        ${JAVA_OPTS} \
+        -server \
+        {{ tomcat_java_opts | join(' \\\n\t')}}"

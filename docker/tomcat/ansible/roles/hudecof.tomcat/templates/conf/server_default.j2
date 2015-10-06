@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- {{ ansible_managed }} -->
+{% include 'server/server_default_start.j2' %}
+{% include 'server/listener_default.j2' %}
+{% include 'server/service_default_start.j2' %}
+{% include 'server/connector_default_http.j2' %}
+{% include 'server/connector_default_ajp.j2' %}
+{% include 'server/engine_default_start.j2' %}
+{% include 'server/host_default_start.j2' %}
+{% include 'server/valve_log_default.j2' %}
+{% include 'server/host_end.j2' %}
+{% include 'server/engine_stop.j2' %}
+{% include 'server/service_end.j2' %}
+{% include 'server/server_end.j2' %}
+
