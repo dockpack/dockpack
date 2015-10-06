@@ -1,5 +1,0 @@
----
-tomcat_service: tomcat
-
-tomcat_packages:
-  - logrotate

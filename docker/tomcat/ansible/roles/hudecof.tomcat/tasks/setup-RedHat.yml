@@ -1,5 +1,0 @@
----
-- name: "check packages (redhat)"
-  action: yum pkg={{ item }} state=present
-  tags: [ tomcat, setup ]
-  with_items: tomcat_packages

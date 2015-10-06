@@ -4,7 +4,7 @@ MAINTAINER Bas Meijer <datasmid@yahoo.com>
 
 RUN yum update -y
 RUN yum install -y epel-release
-RUN yum install -y ansible
+RUN yum install -y ansible tar
 ADD ansible /tmp/ansible
 RUN cd /tmp/ansible && ansible-playbook playbook.yml 
 
