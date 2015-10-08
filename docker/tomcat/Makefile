@@ -10,7 +10,7 @@ build:
 	docker build -t $(AUTHOR)/$(NAME):$(VERSION) .
 
 bash:
-	docker run -ti $(AUTHOR)/$(NAME):$(VERSION) /bin/bash
+	docker exec -ti tomcat /bin/bash
 
 run:
-	docker run -d -p 8080:8080 $(AUTHOR)/$(NAME):$(VERSION)
+	docker run --name tomcat -d -p 8080:8080 $(AUTHOR)/$(NAME):$(VERSION)

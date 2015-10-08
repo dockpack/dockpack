@@ -11,6 +11,7 @@ RUN cd /tmp/ansible && ansible-playbook playbook.yml
 ENV CATALINA_HOME /opt/apache-tomcat
 ENV PATH $CATALINA_HOME/bin:$PATH
 WORKDIR $CATALINA_HOME
+VOLUME [ "/opt/apache-tomcat/webapps" ]
 EXPOSE 8080
-CMD /opt/apache-tomcat/bin/catalina.sh run
+ENTRYPOINT [ "/opt/apache-tomcat/bin/catalina.sh","run"]
 #End
