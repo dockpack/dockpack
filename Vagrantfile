@@ -81,6 +81,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
+
   # Centos 6: Create the DISO STIG hardened centos6 box with 'packer build centos6.json'
   config.vm.define :centos6, autostart: true do |centos6_config|
     centos6_config.vm.box = "dockpack/centos6"
@@ -156,6 +157,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     kali_config.vm.provider "virtualbox" do |vb|
       vb.gui = true
       vb.name = "kali"
+    end
+  end
+
+  config.vm.define :centos7, autostart: true do |centos7_config|
+    centos7_config.vm.box = "dockpack/centos7"
+    centos7_config.vm.box_url = "https://atlas.hashicorp.com/dockpack/boxes/centos7"
+    centos7_config.vm.network "forwarded_port", id: 'ssh', guest: 22, host: 2207, auto_correct: true
+
+    centos7_config.vm.provider "vmware_fusion" do |vmware|
+      vmware.vmx["memsize"] = "2048"
+      vmware.vmx["numvcpus"] = "2"
+    end
+    centos7_config.vm.provider "virtualbox" do |vb|
+      vb.name = "centos7"
     end
   end
 end
