@@ -4,5 +4,5 @@
 yum -y install epel-release
 
 # Install Ansible.
-yum -y install ansible python-setuptools
+yum -y install ansible
 

@@ -28,10 +28,10 @@ packer/vmware-centos7.box:
 	packer validate dockpack-centos7.json
 	packer build --only=vmware-iso dockpack-centos7.json
 
-virtualvm: packer/virtualbox-centos7.box
+virtualvm7: packer/virtualbox-centos7.box
 	vagrant box add --force dockpack/centos7 packer/virtualbox-centos7.box
 
-vmwarevm: packer/vmware-centos7.box
+vmwarevm7: packer/vmware-centos7.box
 	vagrant box add --force dockpack/centos7 packer/vmware-centos7.box
 
 # ---------------------------------------------------------
@@ -44,10 +44,10 @@ packer/vmware-centos6.box:
 	packer validate dockpack-centos6.json
 	packer build --only=vmware-iso dockpack-centos6.json
 
-virtualvm: packer/virtualbox-centos6.box
+virtualvm6: packer/virtualbox-centos6.box
 	vagrant box add --force dockpack/centos6 packer/virtualbox-centos6.box
 
-vmwarevm: packer/vmware-centos6.box
+vmwarevm6: packer/vmware-centos6.box
 	vagrant box add --force dockpack/centos6 packer/vmware-centos6.box
 
 # ---------------------------------------------------------
