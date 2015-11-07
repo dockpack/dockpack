@@ -17,6 +17,23 @@ install:
 audit:
 	ansible-playbook --private-key=pki/vagrant.rsa -i ansible/inventory/ansible.ini -l centos6 ansible/security_audit.yml
 	open file:///tmp/rhel-stig-report.html
+
+# ---------------------------------------------------------
+
+packer/virtualbox-centos7.box:
+	packer validate dockpack-centos7.json
+	packer build -only=virtualbox-iso dockpack-centos7.json
+
+packer/vmware-centos7.box:
+	packer validate dockpack-centos7.json
+	packer build --only=vmware-iso dockpack-centos7.json
+
+virtualvm: packer/virtualbox-centos7.box
+	vagrant box add --force centos7 packer/virtualbox-centos7.box
+
+vmwarevm: packer/vmware-centos7.box
+	vagrant box add --force centos7 packer/vmware-centos7.box
+
 # ---------------------------------------------------------
 
 packer/virtualbox-centos6.box:
@@ -79,6 +96,8 @@ kali:
 	vagrant up kali
 # ---------------------------------------------------------
 
+centos7:
+	vagrant up centos7
 
 centos6:
 	vagrant up centos6
@@ -90,6 +109,7 @@ vmware: vmwarevm
 
 boxes:
 	packer build -only=virtualbox-iso dockpack-centos6.json
+	packer build -only=virtualbox-iso dockpack-centos7.json
 	packer build -only=virtualbox-iso dockpack-kali.json
 	packer build -only=virtualbox-iso dockpack-fedora22.json
 
@@ -102,11 +122,15 @@ clean:
 
 realclean:
 	vagrant destroy -f centos6 || true
+	vagrant destroy -f centos7 || true
 	vagrant box remove centos6 --provider=virtualbox || true
 	vagrant box remove centos6 --provider=vmware_desktop || true
+	vagrant box remove centos7 --provider=virtualbox || true
+	vagrant box remove centos7 --provider=vmware_desktop || true
 	rm -rf .vagrant/
 	rm -f crash.log || true
 	rm -f packer/virtualbox-centos6.box || true
+	rm -f packer/virtualbox-centos7.box || true
 	rm -f packer/vmware-centos6.box || true
 	rm -rf packer_cache
 
@@ -114,6 +138,10 @@ realclean:
 download:
 	@wget --limit-rate=10m --tries=10 --retry-connrefused --waitretry=180 --directory-prefix=${DOWNLOADS} --no-clobber \
 	http://www.mirrorservice.org/sites/mirror.centos.org/6/isos/x86_64/CentOS-6.7-x86_64-netinstall.iso \
+	|| mv ${DOWNLOADS}/CentOS-6.7-x86_64-netinstall.iso ${DOWNLOADS} || true
+
+	@wget --limit-rate=10m --tries=10 --retry-connrefused --waitretry=180 --directory-prefix=${DOWNLOADS} --no-clobber \
+	http://www.mirrorservice.org/sites/mirror.centos.org/7.1.1503/isos/x86_64/CentOS-7-x86_64-DVD-1503-01.iso \
 	|| mv ${DOWNLOADS}/CentOS-6.7-x86_64-netinstall.iso ${DOWNLOADS} || true
 
 	@wget --limit-rate=10m --tries=10 --retry-connrefused --waitretry=180 --directory-prefix=${DOWNLOADS} --no-clobber \
