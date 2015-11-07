@@ -13,4 +13,4 @@ bash:
 	docker exec -ti tomcat /bin/bash
 
 run:
-	docker run --name tomcat -d -p 8080:8080 $(AUTHOR)/$(NAME):$(VERSION)
+	docker run --name tomcat -d -p 8080:8080 $(AUTHOR)/$(NAME):$(VERSION) -v /opt/apache-tomcat/webapps:/tmp/tomcat
