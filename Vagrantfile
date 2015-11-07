@@ -3,8 +3,7 @@
 # To use these virtual machine install Vagrant and VirtuaBox or VMWare.
 # vagrant up [centos6|fedora22|kalu|ubuntu41|coreos|windows]
 
-VAGRANTFILE_API_VERSION = "2"
-Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+Vagrant.configure(2) do |config|
 
   # provision.yml runs on a vagrant up, packer.yml runs on packer build.
   config.vm.provision "ansible" do |ansible|

@@ -90,7 +90,12 @@
   ],
   "post-processors": [{
     "type": "vagrant",
-    "compression_level": 1,
+    "compression_level": 9,
+    "override": {
+        "vmware": {
+          "compression_level": 0
+        }
+    },
     "keep_input_artifact": false,
     "output": "packer/{{.Provider}}-centos7.box"
   }]
