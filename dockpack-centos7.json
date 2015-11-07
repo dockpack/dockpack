@@ -7,8 +7,9 @@
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "scripts": [
-            "scripts/virtualbox.sh",
-            "scripts/ansible-centos7.sh"
+            "scripts/ansible-centos7.sh",
+            "scripts/vagrant.sh",
+            "scripts/virtualbox.sh"
           ]
     },
     {
