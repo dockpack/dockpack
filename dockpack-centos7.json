@@ -67,7 +67,7 @@
         "<tab> append initrd=initrd.img inst.text inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-7.1-x86_64-noX.cfg<enter><wait>"
       ],
       "boot_wait": "30s",
-      "guest_os_type": "redhat",
+      "guest_os_type": "RedHat_64",
       "http_directory": "kickstart",
       "iso_checksum": "85bcf62462fb678adc0cec159bf8b39ab5515404bc3828c432f743a1b0b30157",
       "iso_checksum_type": "sha256",
@@ -90,6 +90,7 @@
   ],
   "post-processors": [{
     "type": "vagrant",
+    "compression_level": 1,
     "keep_input_artifact": false,
     "output": "packer/{{.Provider}}-centos7.box"
   }]

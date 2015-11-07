@@ -21,12 +21,25 @@ if [ -f /etc/sysconfig/network-scripts/ifcfg-eth0 ] ; then
     sed -i "/^UUID/d" /etc/sysconfig/network-scripts/ifcfg-eth0
 fi
 
-# Whiteout the swap partition to reduce box size 
-# Swap is disabled till reboot 
+service rsyslog stop
+service auditd stop
+
+logrotate -f /etc/logrotate.conf
+rm -f /var/log/*-???????? /var/log/*.gz
+rm -f /var/log/dmesg.old
+rm -rf /var/log/anaconda
+truncate -s0 /var/log/audit/audit.log
+truncate -s0 /var/log/wtmp
+truncate -s0 /var/log/lastlog
+truncate -s0 /var/log/grubby
+truncate -s0 ~root/.bash_history
+
+# Whiteout the swap partition to reduce box size
+# Swap is disabled till reboot
 readonly swapuuid=$(/sbin/blkid -o value -l -s UUID -t TYPE=swap)
 readonly swappart=$(readlink -f /dev/disk/by-uuid/"$swapuuid")
 /sbin/swapoff "$swappart"
-dd if=/dev/zero of="$swappart" bs=1M || echo "dd exit code $? is suppressed" 
+dd if=/dev/zero of="$swappart" bs=1M || echo "dd exit code $? is suppressed"
 /sbin/mkswap -U "$swapuuid" "$swappart"
 
 # Zero out the rest of the free space using dd, then delete the written file.
