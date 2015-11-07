@@ -1,8 +1,10 @@
 #!/bin/bash -eux
-
-yum -y erase gcc cpp libstdc++-devel kernel-devel kernel-headers
+package-cleanup --oldkernels --count=1
+yum -y erase gcc cpp libstdc++-devel kernel-devel kernel-headers yum-utils
 
 yum -y clean all
+rm -rf /var/cache/yum/x86_64
+rm -rf /usr/lib/modules/3.10.0-229.el7.x86_64
 rm -rf VBoxGuestAdditions_*.iso VBoxGuestAdditions_*.iso.?
 
 # Unlock vagrant user after applying the RHEL-STIG role.
@@ -45,9 +47,6 @@ dd if=/dev/zero of="$swappart" bs=1M || echo "dd exit code $? is suppressed"
 # Zero out the rest of the free space using dd, then delete the written file.
 dd if=/dev/zero of=/EMPTY bs=1M
 rm -f /EMPTY
-
-# WORKAROUND: remove myself: https://github.com/mitchellh/packer/issues/1536
-rm -f /tmp/script.sh
 
 # Add `sync` so Packer doesn't quit too early, before the large file is deleted.
 sync
