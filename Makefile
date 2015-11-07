@@ -29,10 +29,10 @@ packer/vmware-centos7.box:
 	packer build --only=vmware-iso dockpack-centos7.json
 
 virtualvm: packer/virtualbox-centos7.box
-	vagrant box add --force centos7 packer/virtualbox-centos7.box
+	vagrant box add --force dockpack/centos7 packer/virtualbox-centos7.box
 
 vmwarevm: packer/vmware-centos7.box
-	vagrant box add --force centos7 packer/vmware-centos7.box
+	vagrant box add --force dockpack/centos7 packer/vmware-centos7.box
 
 # ---------------------------------------------------------
 
@@ -45,10 +45,10 @@ packer/vmware-centos6.box:
 	packer build --only=vmware-iso dockpack-centos6.json
 
 virtualvm: packer/virtualbox-centos6.box
-	vagrant box add --force centos6 packer/virtualbox-centos6.box
+	vagrant box add --force dockpack/centos6 packer/virtualbox-centos6.box
 
 vmwarevm: packer/vmware-centos6.box
-	vagrant box add --force centos6 packer/vmware-centos6.box
+	vagrant box add --force dockpack/centos6 packer/vmware-centos6.box
 
 # ---------------------------------------------------------
 

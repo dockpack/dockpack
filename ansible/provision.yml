@@ -1,5 +1,12 @@
 ---
 # This playbook is run as a provisioner for vagrant
+### centos7
+- hosts: centos7
+  user: vagrant
+  sudo: yes
+
+  roles:
+    - issue
 
 ### centos6
 - hosts: centos6
