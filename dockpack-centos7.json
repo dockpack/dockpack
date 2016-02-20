@@ -16,7 +16,8 @@
       "type": "ansible-local",
       "playbook_file": "ansible/centos7.yml",
       "role_paths": [
-        "ansible/roles/docker"
+        "ansible/roles/docker",
+        "ansible/roles/RHEL7-CIS"
       ]
     },
     {
@@ -36,7 +37,7 @@
       "http_directory": "kickstart",
       "iso_checksum": "85bcf62462fb678adc0cec159bf8b39ab5515404bc3828c432f743a1b0b30157",
       "iso_checksum_type": "sha256",
-      "iso_url": "file:///usr/share/images/CentOS-7-x86_64-DVD-1503-01.iso",
+      "iso_url": "file:///usr/local/images/CentOS-7-x86_64-DVD-1503-01.iso",
       "output_directory": "packer-centos-7.1-x86_64-vbox",
       "vm_name": "centos7",
       "ssh_username": "root",
@@ -71,7 +72,7 @@
       "http_directory": "kickstart",
       "iso_checksum": "85bcf62462fb678adc0cec159bf8b39ab5515404bc3828c432f743a1b0b30157",
       "iso_checksum_type": "sha256",
-      "iso_url": "file:///usr/share/images/CentOS-7-x86_64-DVD-1503-01.iso",
+      "iso_url": "file:///usr/local/images/CentOS-7-x86_64-DVD-1503-01.iso",
       "output_directory": "packer-centos-7.1-x86_64-vmware-oss",
       "ssh_username": "root",
       "ssh_password": "vagrant",

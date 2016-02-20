@@ -21,6 +21,10 @@
 - src: https://github.com/bbaassssiiee/ansible-eclipse.git
   path: ./roles/
 
+# Under development 
+- src: https://github.com/bbaassssiiee/RHEL7-CIS.git
+  path: ./roles/
+
 ## Galaxy roles released
 
 - src: https://github.com/MindPointGroup/RHEL6-STIG.git
