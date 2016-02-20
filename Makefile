@@ -10,7 +10,7 @@ help:
 
 
 install:
-	(cd ansible && ansible-galaxy install --force -r requirements.yml)
+	(cd ansible && ansible-galaxy install -p roles --force -r requirements.yml)
 	@echo installing python extensions for provisioning
 	pip install --upgrade -r ansible/requirements.pip
 	cp downloads/* /tmp
