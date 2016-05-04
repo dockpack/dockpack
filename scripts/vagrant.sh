@@ -1,4 +1,5 @@
 #!/bin/bash
+yum -y install wget
 # create vagrant user and group
 /usr/sbin/groupadd vagrant
 /usr/sbin/useradd vagrant -g vagrant -G wheel -d /home/vagrant -c "vagrant"

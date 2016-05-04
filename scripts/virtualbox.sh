@@ -1,5 +1,5 @@
 #!/bin/bash -eux
-
+yum -y install bzip2
 VBOX_VERSION=$(cat /root/.vbox_version)
 cd /tmp
 mount -o loop /root/VBoxGuestAdditions_$VBOX_VERSION.iso /mnt
