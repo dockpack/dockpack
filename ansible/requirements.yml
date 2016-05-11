@@ -28,7 +28,7 @@
 ## Galaxy roles released
 
 - src: https://github.com/MindPointGroup/RHEL6-STIG.git
-  version: devel
+  version: v0.9
   path: ./roles/
 
 # Centos plumbing for virtual machine provisioning
