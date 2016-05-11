@@ -123,10 +123,10 @@ clean:
 realclean:
 	vagrant destroy -f centos6 || true
 	vagrant destroy -f centos7 || true
-	vagrant box remove centos6 --provider=virtualbox || true
-	vagrant box remove centos6 --provider=vmware_desktop || true
-	vagrant box remove centos7 --provider=virtualbox || true
-	vagrant box remove centos7 --provider=vmware_desktop || true
+	vagrant box remove dockpack/centos6 --provider=virtualbox || true
+	vagrant box remove dockpack/centos6 --provider=vmware_desktop || true
+	vagrant box remove dockpack/centos7 --provider=virtualbox || true
+	vagrant box remove dockpack/centos7 --provider=vmware_desktop || true
 	rm -rf .vagrant/
 	rm -f crash.log || true
 	rm -f packer/virtualbox-centos6.box || true
