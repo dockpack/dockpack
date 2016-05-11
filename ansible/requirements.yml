@@ -25,11 +25,11 @@
 - src: https://github.com/bbaassssiiee/RHEL7-CIS.git
   path: ./roles/
 
-## Galaxy roles released
-
-- src: https://github.com/MindPointGroup/RHEL6-STIG.git
-  version: v0.9
+- src: https://github.com/bbaassssiiee/RHEL6-STIG.git
   path: ./roles/
+## Galaxy role 
+#- src: https://github.com/MindPointGroup/RHEL6-STIG.git
+#  version: v0.9
 
 # Centos plumbing for virtual machine provisioning
 - src: bbaassssiiee.commoncentos
