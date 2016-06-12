@@ -1,0 +1,57 @@
+---
+- name: 'ensure auditing at boot time'
+  command: sed -i '/^\tkernel/ s/$/ audit=1/' /etc/grub.conf
+
+- name: 'Disable accounts after three login failures in a 15-minute interval.'
+  pam:
+    service: "{{ item }}"
+    type: auth
+    control: required
+    pam_module: pam_faillock.so
+    before_line: auth sufficient pam_unix.so try_first_pass
+    arguments: preauth silent deny=3 unlock_time=604800 fail_interval=900
+    state: present
+  with_items:
+    - password-auth
+    - system-auth
+  tags:
+    - pam
+      
+- name: 'The system must require administrator action to unlock an account locked by excessive failed login attempts.'
+  pam:
+    service: "{{ item }}"
+    type: auth
+    control: '[default=die]' 
+    pam_module: pam_faillock.so
+    arguments: authfail deny=3 unlock_time=604800 fail_interval=900 
+    after_line: auth sufficient pam_unix.so try_first_pass
+    state: present 
+  with_items:
+    - system-auth
+    - password-auth
+  tags:
+    - pam
+    
+- name: 'Pam faillock is required for account.'
+  pam:
+    service: "{{ item }}"
+    type: account
+    control: required
+    pam_module: pam_faillock.so
+    before_line: account required pam_unix.so
+    state: present 
+  with_items:
+    - system-auth
+    - password-auth
+  tags:
+    - pam
+    
+- name: 'Strip trailing spaces for compliance'
+  command: "sed -i 's/      $//' /etc/pam.d/{{ item }}"
+  changed_when: no
+  with_items:
+    - system-auth
+    - password-auth
+  tags:
+    - pam
+    
