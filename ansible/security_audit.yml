@@ -26,9 +26,13 @@
 
   - name: 'ensure absense of STIG_SCAP results.xml file'
     file: dest=/root/results.xml state=absent
+    tags:
+      - audit
 
   - name: 'ensure absense of STIG_SCAP rhel-stig-report.html file'
     file: dest=/root/rhel-stig-report.html state=absent
+    tags:
+      - audit
 
   - name: 'download from http://iase.disa.mil/'
     get_url: url={{stig_baseurl}}/{{stig_benchmark}} dest=/tmp/{{stig_benchmark}}
@@ -48,9 +52,13 @@
       U_RedHat_6_V1R8_STIG_SCAP_1-1_Benchmark-xccdf.xml"
     no_log: yes
     ignore_errors: yes
+    tags:
+      - audit
 
   - name: 'fetch report into /tmp/rhel-stig-report.html'
     fetch: dest=/tmp/rhel-stig-report.html src=/root/rhel-stig-report.html flat=yes
+    tags:
+      - audit
 
   - name: 'download Red Hat Security Response Team OVAL definitions, part 1'
     get_url: url=http://www.redhat.com/security/data/metrics/com.redhat.rhsa-all.xccdf.xml
