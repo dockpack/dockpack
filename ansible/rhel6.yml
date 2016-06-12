@@ -4,8 +4,8 @@
   user: vagrant
   sudo: yes
 
-  pre_tasks:
-    - include: roles/bbaassssiiee.commoncentos/tasks/stig.yml
+#  pre_tasks:
+#    - include: roles/bbaassssiiee.commoncentos/tasks/stig.yml
 
   roles:
     - bbaassssiiee.commoncentos
