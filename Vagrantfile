@@ -86,13 +86,15 @@ Vagrant.configure(2) do |config|
     centos6_config.vm.box = "dockpack/centos6"
     centos6_config.vm.box_url ="https://atlas.hashicorp.com/dockpack/boxes/centos6"
     centos6_config.vm.network "forwarded_port", id: 'ssh', guest: 22, host: 2201, auto_correct: true
-
+		centos6_config.vm.hostname = "centos6"
     centos6_config.vm.provider "vmware_fusion" do |vmware|
       vmware.vmx["memsize"] = "2048"
       vmware.vmx["numvcpus"] = "2"
     end
     centos6_config.vm.provider "virtualbox" do |vb|
       vb.name = "centos6"
+			vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
     end
   end
 
