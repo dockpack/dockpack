@@ -1,0 +1,53 @@
+---
+- name: 'update ansible'
+  yum: name=ansible state=latest
+  
+- name: 'copy vagrant private key'
+  copy: src=vagrant.rsa
+        dest=/home/vagrant/.ssh/vagrant.rsa
+        owner=vagrant
+        group=vagrant
+        mode=0400
+        
+- name: 'copy hosts file'
+  copy: src=hosts 
+        dest=/etc/hosts
+        owner=root
+        group=root
+        mode=0644
+  
+- name: 'copy ansible inventory file'
+  copy: src=inventory 
+        dest=/home/vagrant/inventory
+        owner=vagrant
+        group=vagrant
+        mode=0644
+        
+- name: 'copy ansible config file'
+  copy: src=ansible.cfg 
+        dest=/home/vagrant/ansible.cfg
+        owner=vagrant
+        group=vagrant
+        mode=0644
+
+- name: 'add packages for ansible management'
+  yum: name={{ item }} state=present
+  with_items:
+   - unzip
+   - git
+   - python-argparse
+  tags:
+    - scan
+
+- name: 'install python-pip'
+  yum: name=python-pip state=latest
+
+- name: 'add python modules audit'
+  pip: name={{item}}
+  with_items: 
+    - tabulate
+    - untangle
+    - pytest
+    - python-coveralls
+    - pytest-cov
+
