@@ -1,12 +1,24 @@
 #!/bin/bash -eux
-yum -y install bzip2
-VBOX_VERSION=$(cat /root/.vbox_version)
-cd /tmp
-mount -o loop /root/VBoxGuestAdditions_$VBOX_VERSION.iso /mnt
-sh /mnt/VBoxLinuxAdditions.run
-umount /mnt
-rm -rf /home/vagrant/VBoxGuestAdditions_*.iso
+# set a default HOME_DIR environment variable if not set
+HOME_DIR="${HOME_DIR:-/root}";
 
+case "$PACKER_BUILDER_TYPE" in
+
+virtualbox-iso|virtualbox-ovf)
+
+    yum install -y gcc cpp bzip2 libstdc++-devel kernel-devel kernel-headers
+
+    mkdir -p /tmp/vbox;
+    ver="`cat /root/.vbox_version`";
+    mount -o loop $HOME_DIR/VBoxGuestAdditions.iso /tmp/vbox;
+    sh /tmp/vbox/VBoxLinuxAdditions.run \
+        || echo "VBoxLinuxAdditions.run exited $? and is suppressed." \
+            "For more read https://www.virtualbox.org/ticket/12479";
+    umount /tmp/vbox;
+    rm -rf /tmp/vbox;
+    rm -f $HOME_DIR/*.iso;
+    ;;
+esac
 
 if [[ "$PACKER_BUILDER_TYPE" == virtualbox* ]]; then
   ## https://access.redhat.com/site/solutions/58625 (subscription required)

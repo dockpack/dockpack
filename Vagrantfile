@@ -30,7 +30,7 @@ Vagrant.configure(2) do |config|
   config.ssh.insert_key = false
   config.vm.box_check_update = false
   # disable guest additions
-  config.vm.synced_folder ".", "/vagrant", id: "vagrant-root", disabled: true
+  config.vm.synced_folder ".", "/vagrant", id: "vagrant-root", disabled: false
 
   # Apple OS X: Get a life, get a Mac! Implementation details for osx packer boxes:
   # https://github.com/boxcutter/osx

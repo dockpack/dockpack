@@ -31,8 +31,7 @@
       "playbook_file": "ansible/rhel6.yml",
       "role_paths": [
         "ansible/roles/bbaassssiiee.commoncentos",
-        "ansible/roles/RHEL6-STIG",
-        "ansible/roles/workshop"
+        "ansible/roles/RHEL6-STIG"
       ],
       "extra_arguments": ["-vv"]
     },
@@ -58,10 +57,11 @@
       "iso_checksum_type": "md5",
       "iso_checksum": "171ce654ec06040d096daf75934ca8ca",
       "shutdown_command": "echo 'vagrant' | sudo -S /sbin/shutdown -h 0",
-      "ssh_username": "vagrant",
+      "ssh_username": "root",
       "ssh_password": "vagrant",
       "ssh_wait_timeout": "20m",
-      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+      "guest_additions_mode": "upload",
+      "guest_additions_path": "VBoxGuestAdditions.iso",
       "virtualbox_version_file": ".vbox_version",
       "vm_name": "centos6",
       "vboxmanage": [
@@ -84,7 +84,7 @@
       "boot_command": [
         "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-6.7-x86_64-noX.cfg<enter><wait>"
       ],
-      "boot_wait": "10s",
+      "boot_wait": "30s",
       "guest_os_type": "Centos-64",
       "headless": false,
       "http_directory": "kickstart",
@@ -95,9 +95,9 @@
       "iso_checksum_type": "md5",
       "iso_checksum": "171ce654ec06040d096daf75934ca8ca",
       "shutdown_command": "echo 'vagrant' | sudo -S /sbin/shutdown -h 0",
-      "ssh_username": "vagrant",
+      "ssh_username": "root",
       "ssh_password": "vagrant",
-      "ssh_wait_timeout": "20m",
+      "ssh_wait_timeout": "10000s",
       "tools_upload_flavor": "linux",
       "vm_name": "centos6",
       "vmx_data": {
@@ -106,7 +106,7 @@
         "numvcpus": "2"
       }
     },{
-    
+
 	    "type": "amazon-ebs",
 	    "access_key": "{{user `aws_access_key`}}",
 	    "secret_key": "{{user `aws_secret_key`}}",
@@ -120,7 +120,7 @@
 	    "ssh_timeout": "10000s",
 
 	    "ami_name": "amazon-ebs-centos-box {{timestamp}}"
-    
+
     }
   ],
   "post-processors": [
