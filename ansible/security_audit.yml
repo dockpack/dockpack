@@ -1,6 +1,6 @@
 - hosts: centos6
   gather_facts: False
-  sudo: yes
+  become: yes
 
   vars:
     - requirements:
@@ -12,7 +12,9 @@
 
   tasks:
   - name: 'add packages for security audit'
-    yum: name={{ item }} state=present
+    yum:
+      name: "{{ item }}"
+      state: present
     with_items:
      - unzip
      - git
@@ -21,28 +23,38 @@
      - python-pip
 
   - name: 'add python modules for security audit'
-    pip: name={{item}}
-    with_items: requirements
+    pip:
+      name: "{{item}}"
+    with_items: "{{ requirements }}"
 
   - name: 'ensure absense of STIG_SCAP results.xml file'
-    file: dest=/root/results.xml state=absent
+    file:
+      dest: /root/results.xml
+      state: absent
     tags:
       - audit
       - stig
 
   - name: 'ensure absense of STIG_SCAP rhel-stig-report.html file'
-    file: dest=/root/rhel-stig-report.html state=absent
+    file:
+      dest: /root/rhel-stig-report.html
+      state: absent
     tags:
       - audit
       - stig
 
   - name: 'download from http://iase.disa.mil/'
-    get_url: url={{stig_baseurl}}/{{stig_benchmark}} dest=/tmp/{{stig_benchmark}}
+    get_url:
+      url: "{{stig_baseurl}}/{{stig_benchmark}}"
+      dest: "/tmp/{{stig_benchmark}}"
     tags:
       - stig
 
   - name: 'unzip Security Content Automation Protocol (SCAP) Content and Tools'
-    command: unzip -o /tmp/{{stig_benchmark}}
+    unarchive: 
+      copy: no
+      src: /tmp/{{stig_benchmark}}
+      dest: /home/vagrant
     tags:
       - stig
 
@@ -55,33 +67,12 @@
     command: "oscap xccdf eval \
       --profile MAC-1_Sensitive \
       --results /tmp/results.xml \
-      --report /tmp/rhel-stig-report.html \
+      --report /vagrant/rhel-stig-report.html \
       --cpe U_RedHat_6_V1R8_STIG_SCAP_1-1_Benchmark-cpe-dictionary.xml \
       U_RedHat_6_V1R8_STIG_SCAP_1-1_Benchmark-xccdf.xml"
-    no_log: no
+    no_log: yes
     ignore_errors: yes
     tags:
       - audit
       - stig
 
-  - name: 'fetch report into /tmp/rhel-stig-report.html'
-    fetch: dest=/tmp/rhel-stig-report.html src=/tmp/rhel-stig-report.html flat=yes
-    tags:
-      - audit
-      - stig
-
-  - name: 'download Red Hat Security Response Team OVAL definitions, part 1'
-    get_url: url=http://www.redhat.com/security/data/metrics/com.redhat.rhsa-all.xccdf.xml
-             dest=/tmp/com.redhat.rhsa-all.xccdf.xml
-
-  - name: 'download Red Hat Security Response Team OVAL definitions, part 2'
-    get_url: url=http://www.redhat.com/security/data/oval/com.redhat.rhsa-all.xml
-             dest=/tmp/com.redhat.rhsa-all.xml
-
-  - name: 'run the SCAP tool and create vulnerability-report.html'
-    command: "oscap xccdf eval --results /root/results.xml \
-      --report /root/vulnerability-report.html \
-      /tmp/com.redhat.rhsa-all.xccdf.xml"
-
-  - name: 'fetch report into /tmp/vulnerability-report.html'
-    fetch: dest=/tmp/vulnerability-report.html src=/root/vulnerability-report.html flat=yes
