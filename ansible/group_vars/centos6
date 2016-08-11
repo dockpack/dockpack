@@ -15,6 +15,7 @@ yum_packages:
    - acpid
 
 # FOR THE RHEL_STIG security compliance
+rhel6stig_set_bootloader_password: false
 rhel6stig_cat1: true
 rhel6stig_cat2: true
 rhel6stig_cat3: true
