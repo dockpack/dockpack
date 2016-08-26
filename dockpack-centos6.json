@@ -31,6 +31,7 @@
       "playbook_file": "ansible/rhel6.yml",
       "role_paths": [
         "ansible/roles/bbaassssiiee.commoncentos",
+        "ansible/roles/loghost",
         "ansible/roles/RHEL6-STIG"
       ],
       "extra_arguments": ["-vv"]

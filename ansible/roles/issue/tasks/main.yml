@@ -1,3 +1,0 @@
-- name: creates issue
-  template: src=issue.j2 dest=/etc/issue owner=root group=root mode=0644
-

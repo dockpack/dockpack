@@ -1,3 +1,4 @@
+#!/usr/bin/env ansible-playbook
 - hosts: centos6
   gather_facts: False
   become: yes

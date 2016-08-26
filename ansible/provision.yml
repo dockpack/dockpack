@@ -6,7 +6,7 @@
   sudo: yes
 
   roles:
-    - docker
+    - RHEL7-CIS
 
 ### centos6
 - hosts: centos6
@@ -17,8 +17,7 @@
     - "group_vars/centos6"
 
   roles: 
-    - workshop
- 
+    - { role: RHEL6-STIG, rhel6stig_cat2: true, rhel6stig_cat3: true, rhel6stig_is_mail_relay: true }
 
 
 ### Ubuntu
@@ -45,7 +44,7 @@
   sudo: yes
 
   roles:
-    - issue
+    - ntp
 
 - name: bootstrap coreos hosts
   hosts: coreos

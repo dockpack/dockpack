@@ -31,7 +31,7 @@ rhel6stig_auditd_config:
   # V-38464 - compliant options SYSLOG|EXEC|SINGLE|HALT
   disk_error_action: SYSLOG
   # V-38468 - compliant options SYSLOG|EXEC|SINGLE|HALT
-  disk_full_action: SYSLOG
+  disk_full_action: SINGLE
   # V-38470 - compliant options EMAIL|SYSLOG
   space_left_action: EMAIL
   # V-38633 - compliant options 6 or higher (MB)
