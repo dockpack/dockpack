@@ -4,10 +4,10 @@
   user: vagrant
   become: yes
 
-  pre_tasks:
-    - include: roles/bbaassssiiee.commoncentos/tasks/stig.yml
+  #pre_tasks:
+  #  - include: roles/bbaassssiiee.commoncentos/tasks/stig.yml
 
   roles:
-    - bbaassssiiee.commoncentos
+    #- bbaassssiiee.commoncentos
     - loghost
-    - { role: RHEL6-STIG, rhel6stig_cat2: true, rhel6stig_cat3: false, rhel6stig_is_mail_relay: true }
+    - { role: RHEL6-STIG, rhel6stig_cat2: true, rhel6stig_cat3: false, rhel6stig_is_mail_relay: true, rhel6stig_set_bootloader_password: false }
