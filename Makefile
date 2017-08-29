@@ -29,7 +29,11 @@ packer/vmware-centos7.box:
 	packer build --only=vmware-iso dockpack-centos7.json
 
 virtualvm7: packer/virtualbox-centos7.box
+	vagrant box remove dockpack/centos7 --provider=virtualbox || true
+	packer validate dockpack-centos7.json
+	packer build -only=virtualbox-iso dockpack-centos7.json
 	vagrant box add --force dockpack/centos7 packer/virtualbox-centos7.box
+	vagrant up centos7
 
 vmwarevm7: packer/vmware-centos7.box
 	vagrant box add --force dockpack/centos7 packer/vmware-centos7.box
@@ -131,5 +135,5 @@ download:
 	&& mv ${DOWNLOADS}/Fedora-Server-netinst-x86_64-21.iso ${DOWNLOADS} || true
 
 demo: centos6 audit
-all: clean install virtualvm6 centos6 
+all: clean install virtualvm6 centos6
 
