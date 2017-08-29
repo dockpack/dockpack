@@ -13,7 +13,7 @@ Vagrant.configure(2) do |config|
    end
 
   # Prefer VirtualBox before VMware Fusion
-  config.vm.provider "virtualbox"
+  #config.vm.provider "virtualbox"
   config.vm.provider "vmware_fusion"
 
   config.vm.provider "virtualbox" do |virtualbox|
@@ -30,31 +30,31 @@ Vagrant.configure(2) do |config|
   config.ssh.insert_key = false
   config.vm.box_check_update = false
   # disable guest additions
-  config.vm.synced_folder ".", "/vagrant", id: "vagrant-root", disabled: false
+  config.vm.synced_folder ".", "/vagrant", id: "vagrant-root", disabled: true
 
   # Apple OS X: Get a life, get a Mac! Implementation details for osx packer boxes:
   # https://github.com/boxcutter/osx
 
   # Windows: You need to create a temporarily licenced Windows box with 'packer build windows.json'
   config.vm.define :windows, autostart: true do |windows_config|
+    windows_config.vm.network "public_network", use_dhcp_assigned_default_route: true
     windows_config.vm.box = "windows"
+    windows_config.vm.box_url = "https://az792536.vo.msecnd.net/vms/VMBuild_20150916/Vagrant/IE11/IE11.Win7.Vagrant.zip"
     windows_config.vm.communicator = "winrm"
-
     windows_config.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true
-    windows_config.vm.network :forwarded_port, guest: 22, host: 2200, id: "ssh", auto_correct: true
+    windows_config.vm.network :forwarded_port, guest: 5985, host: 5985, id: "winrm", auto_correct: false
 
     # Admin user name and password
-    windows_config.winrm.username = "vagrant"
-    windows_config.winrm.password = "vagrant"
+    windows_config.winrm.username = "IEUser"
+    windows_config.winrm.password = "Passw0rd!"
 
     windows_config.vm.guest = :windows
     windows_config.windows.halt_timeout = 15
 
     windows_config.vm.provider :virtualbox do |vb, override|
-        # Use Remote Desktop Protocol
         vb.gui = false
         vb.name = "windows"
-        vb.customize ["modifyvm", :id, "--memory", 2048]
+        vb.customize ["modifyvm", :id, "--memory", 4096]
         vb.customize ["modifyvm", :id, "--cpus", 2]
         vb.customize ["setextradata", "global", "GUI/SuppressMessages", "all" ]
     end
@@ -175,4 +175,3 @@ Vagrant.configure(2) do |config|
     end
   end
 end
-
