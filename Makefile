@@ -134,6 +134,10 @@ download:
 	http://www.mirrorservice.org/sites/download.fedora.redhat.com/pub/fedora/linux/releases/21/Server/x86_64/iso/Fedora-Server-netinst-x86_64-21.iso \
 	&& mv ${DOWNLOADS}/Fedora-Server-netinst-x86_64-21.iso ${DOWNLOADS} || true
 
+	@wget --limit-rate=10m --tries=10 --retry-connrefused --waitretry=180 --directory-prefix=${DOWNLOADS} --no-clobber \
+	http://cdimage.kali.org/kali-1.1.0a/kali-linux-1.1.0a-amd64.iso \
+	|| mv ${DOWNLOADS}/kali-1.1.0a/kali-linux-1.1.0a-amd64.iso ${DOWNLOADS} || true
+
 demo: centos6 audit
 all: clean install virtualvm6 centos6
 
