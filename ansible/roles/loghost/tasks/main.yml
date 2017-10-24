@@ -1,2 +1,4 @@
 - name: 'send logs to a remote loghost'
   lineinfile: state=present backup=no dest=/etc/rsyslog.conf regexp='^\*\.\*' line='*.* @@loghost:514'
+  tags:
+    - loghost

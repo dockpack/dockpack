@@ -1,0 +1,14 @@
+#!/usr/bin/env ansible-playbook
+- hosts: centos7
+  become: yes
+
+  roles:
+    - RHEL7-CIS
+
+- hosts: centos6
+  become: yes
+
+  roles:
+    - loghost
+    - { role: RHEL6-STIG, rhel6stig_cat2: false, rhel6stig_cat3: true, rhel6stig_is_mail_relay: true }
+

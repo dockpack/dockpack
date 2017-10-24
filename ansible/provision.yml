@@ -1,37 +1,30 @@
----
+#!/usr/bin/env ansible-playbook
 # This playbook is run as a provisioner for vagrant
 ### centos7
 - hosts: centos7
   user: vagrant
-  sudo: yes
+  become: yes
 
   roles:
-    - docker
+    - loghost
 
 ### centos6
 - hosts: centos6
   user: vagrant
-  sudo: yes
+  become: yes
 
   vars_files:
     - "group_vars/centos6"
-  pre_tasks:
-    - include: roles/bbaassssiiee.commoncentos/tasks/stig.yml
 
   roles:
-    - bbaassssiiee.commoncentos
-    - loghost
     - { role: RHEL6-STIG, rhel6stig_cat2: true, rhel6stig_cat3: true, rhel6stig_is_mail_relay: true }
-    - issue
 
-  tasks:
-    - include: tasks/dockpack.yml
 
 ### Ubuntu
 - name: bootstrap ubuntu hosts
   hosts: ubuntu
   gather_facts: True
-  sudo: yes
+  become: yes
 
   vars_files:
     - "group_vars/ubuntu"
@@ -39,23 +32,19 @@
   pre_tasks:
     - include: tasks/dockpack.yml
 
-  roles:
-    - geerlingguy.java
-    - ansible-maven
-    - ansible-ant
-    - ansible-eclipse
+  roles: []
 
   tasks:
     - include: tasks/dockpack.yml
 
 ### fedora
 - name: bootstrap fedora hosts
-  hosts: fedora22
+  hosts: fedora
   gather_facts: True
-  sudo: yes
-
+  become: yes
   roles:
-    - issue
+    - loghost
+
 
 - name: bootstrap coreos hosts
   hosts: coreos

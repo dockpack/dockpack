@@ -2,11 +2,12 @@
 # This playbook is run from packer during kickstart (phase 1)
 - hosts: 127.0.0.1
   user: vagrant
-  sudo: yes
+  become: yes
 
-  pre_tasks:
-    - include: roles/bbaassssiiee.commoncentos/tasks/stig.yml
+  #pre_tasks:
+  #  - include: roles/bbaassssiiee.commoncentos/tasks/stig.yml
 
   roles:
-    - bbaassssiiee.commoncentos
-    - { role: RHEL6-STIG, rhel6stig_cat2: true, rhel6stig_cat3: true, rhel6stig_is_mail_relay: true }
+    #- bbaassssiiee.commoncentos
+    - loghost
+    - { role: RHEL6-STIG, rhel6stig_cat2: true, rhel6stig_cat3: false, rhel6stig_is_mail_relay: true, rhel6stig_set_bootloader_password: false }
