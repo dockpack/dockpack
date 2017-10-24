@@ -71,3 +71,9 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# Downloaded iso images
+downloads/CentOS-6.7-x86_64-netinstall.iso
+downloads/CentOS-7-x86_64-DVD-1503-01.iso
+downloads/Fedora-Server-netinst-x86_64-21.iso
+downloads/kali-linux-1.1.0a-amd64.iso
