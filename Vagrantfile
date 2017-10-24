@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 # To use these virtual machine install Vagrant and VirtuaBox or VMWare.
-# vagrant up [centos6|fedora22|kalu|ubuntu41|coreos|windows]
+# vagrant up [centos6|fedora|kali|ubuntu14|coreos|windows]
 
 Vagrant.configure(2) do |config|
 
@@ -15,7 +15,8 @@ Vagrant.configure(2) do |config|
   # Prefer VirtualBox before VMware Fusion
   #config.vm.provider "virtualbox"
   config.vm.provider "vmware_fusion"
-
+  config.vbguest.auto_update = false
+  config.ssh.insert_key = false
   config.vm.provider "virtualbox" do |virtualbox|
     virtualbox.gui = false
     virtualbox.customize ["modifyvm", :id, "--memory", 2048]
@@ -32,8 +33,18 @@ Vagrant.configure(2) do |config|
   # disable guest additions
   config.vm.synced_folder ".", "/vagrant", id: "vagrant-root", disabled: true
 
-  # Apple OS X: Get a life, get a Mac! Implementation details for osx packer boxes:
-  # https://github.com/boxcutter/osx
+  config.vm.define :centos7, primary: true, autostart: true do |centos7_config|
+    centos7_config.vm.box = "dockpack/centos7"
+    centos7_config.vm.network "forwarded_port", id: 'ssh', guest: 22, host: 2207, auto_correct: true
+
+    centos7_config.vm.provider "vmware_fusion" do |vmware|
+      vmware.vmx["memsize"] = "2048"
+      vmware.vmx["numvcpus"] = "2"
+    end
+    centos7_config.vm.provider "virtualbox" do |vb|
+      vb.name = "centos7"
+    end
+  end
 
   # Windows: You need to create a temporarily licenced Windows box with 'packer build windows.json'
   config.vm.define :windows, autostart: true do |windows_config|
@@ -84,7 +95,6 @@ Vagrant.configure(2) do |config|
   # Centos 6: Create the DISO STIG hardened centos6 box with 'packer build centos6.json'
   config.vm.define :centos6, autostart: true do |centos6_config|
     centos6_config.vm.box = "dockpack/centos6"
-    centos6_config.vm.box_url ="https://atlas.hashicorp.com/dockpack/boxes/centos6"
     centos6_config.vm.network "forwarded_port", id: 'ssh', guest: 22, host: 2201, auto_correct: true
 		centos6_config.vm.hostname = "centos6"
     centos6_config.vm.provider "vmware_fusion" do |vmware|
@@ -114,19 +124,16 @@ Vagrant.configure(2) do |config|
     end
   end
 
-  ## Chef's Bento project on Hashicorp Atlas: Bento project https://github.com/chef/bento
-  # Just an example of a linux from this project
-  config.vm.define :fedora22, autostart: true do |fedora22_config|
-    fedora22_config.vm.box = "dockpack/fedora22"
-    fedora22_config.vm.box_url = "https://atlas.hashicorp.com/dockpack/boxes/fedora22"
-    fedora22_config.vm.network "forwarded_port", id: 'ssh', guest: 22, host: 2203, auto_correct: true
+  config.vm.define :fedora, autostart: true do |fedora_config|
+    fedora_config.vm.box = "fedora/26-atomic-host"
+    fedora_config.vm.network "forwarded_port", id: 'ssh', guest: 22, host: 2203, auto_correct: true
 
-    fedora22_config.vm.provider "vmware_fusion" do |vmware|
+    fedora_config.vm.provider "vmware_fusion" do |vmware|
       vmware.vmx["memsize"] = "2048"
       vmware.vmx["numvcpus"] = "2"
     end
-    fedora22_config.vm.provider "virtualbox" do |vb|
-      vb.name = "fedora22"
+    fedora_config.vm.provider "virtualbox" do |vb|
+      vb.name = "fedora"
     end
   end
 
@@ -146,8 +153,7 @@ Vagrant.configure(2) do |config|
 
   ## Kali linux
   config.vm.define "kali", autostart: false do |kali_config|
-    kali_config.vm.box = "dockpack/kali"
-    kali_config.vm.box_url ="https://atlas.hashicorp.com/dockpack/boxes/kali"
+    kali_config.vm.box = "Sliim/kali-linux-2.0-amd64"
     kali_config.vm.network "forwarded_port", id: 'ssh', guest: 22, host: 2205, auto_correct: true
 
     kali_config.vm.provider "vmware_fusion" do |vmware|
@@ -161,17 +167,4 @@ Vagrant.configure(2) do |config|
     end
   end
 
-  config.vm.define :centos7, autostart: true do |centos7_config|
-    centos7_config.vm.box = "dockpack/centos7"
-    centos7_config.vm.box_url = "https://atlas.hashicorp.com/dockpack/boxes/centos7"
-    centos7_config.vm.network "forwarded_port", id: 'ssh', guest: 22, host: 2207, auto_correct: true
-
-    centos7_config.vm.provider "vmware_fusion" do |vmware|
-      vmware.vmx["memsize"] = "2048"
-      vmware.vmx["numvcpus"] = "2"
-    end
-    centos7_config.vm.provider "virtualbox" do |vb|
-      vb.name = "centos7"
-    end
-  end
 end
