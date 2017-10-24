@@ -4,6 +4,7 @@
 
 # Store your secrets here, not on Github
 pki
+ansible/files/
 
 # Re-use Galaxy roles: use ansible/requirements.yml
 ansible/roles
