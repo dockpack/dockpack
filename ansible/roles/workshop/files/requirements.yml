@@ -1,5 +1,0 @@
----
-# Roles are installed from elsewhere, from Git or Galaxy.
-
-- src: hostclick.tomcat
-- src: bbaassssiiee.el_postgres_role
