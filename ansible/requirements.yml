@@ -4,19 +4,13 @@
 # to re-install: use the force, Luke Skywalker
 # ansible-galaxy install --force -r requirements.yml
 
-- src: bbaassssiiee.commoncentos
-  path: roles/
-
 ## Github forks of Galaxy roles
 
-# Under development 
+# Under development
 - src: https://github.com/bbaassssiiee/RHEL7-CIS.git
   path: ./roles/
 
 - src: https://github.com/bbaassssiiee/RHEL6-STIG.git
   path: ./roles/
-## Galaxy role 
-#- src: https://github.com/MindPointGroup/RHEL6-STIG.git
-#  version: v0.9
 
-
+- src: defunctzombie.coreos-bootstrap
