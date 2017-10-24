@@ -78,7 +78,7 @@ build: check
 
 # ---------------------------------------------------------
 fedora:
-	vagrant up fedora22
+	vagrant up fedora
 
 ubuntu:
 	vagrant up ubuntu14
