@@ -7,10 +7,10 @@
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "scripts": [
-            "scripts/vagrant.sh",
-            "scripts/ansible-centos7.sh",
-            "scripts/vmtools.sh"
-          ]
+        "scripts/vagrant.sh",
+        "scripts/vmtools.sh",
+        "scripts/ansible-centos7.sh"
+      ]
     },
     {
       "type": "ansible-local",
@@ -30,16 +30,17 @@
       "type": "virtualbox-iso",
       "headless": false,
       "boot_command": [
-        "<tab> append initrd=initrd.img inst.text inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-7.1-x86_64-noX.cfg<enter><wait>"
+        "<tab> append initrd=initrd.img inst.text inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-7.4-x86_64-noX.cfg<enter><wait>"
       ],
       "boot_wait": "20s",
       "guest_os_type": "RedHat_64",
       "http_directory": "kickstart",
-      "iso_checksum": "f90e4d28fa377669b2db16cbcb451fcb9a89d2460e3645993e30e137ac37d284",
+  		"iso_checksum": "bba314624956961a2ea31dd460cd860a77911c1e0a56e4820a12b9c5dad363f5",
       "iso_checksum_type": "sha256",
-      "iso_urls": [ "file:///Users/Shared/CentOS-7-x86_64-Minimal-1511.iso",
-                 "http://mirror.nl.leaseweb.net/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso" ],
-      "output_directory": "packer-centos-7.1-x86_64-vbox",
+      "iso_urls": [ "file:///Users/Shared/CentOS-7-x86_64-Minimal-1708.iso",
+                 "http://mirror.nl.leaseweb.net/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1708.iso"
+      ],
+      "output_directory": "output-virtualbox-iso",
       "vm_name": "centos7",
       "ssh_username": "root",
       "ssh_password": "vagrant",
@@ -66,16 +67,17 @@
       "type": "vmware-iso",
       "headless": false,
       "boot_command": [
-        "<tab> append initrd=initrd.img inst.text inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-7.1-x86_64-noX.cfg<enter><wait>"
+        "<tab> append initrd=initrd.img inst.text inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-7.4-x86_64-noX.cfg<enter><wait>"
       ],
       "boot_wait": "30s",
       "guest_os_type": "Centos-64",
       "http_directory": "kickstart",
-      "iso_checksum": "f90e4d28fa377669b2db16cbcb451fcb9a89d2460e3645993e30e137ac37d284",
+  		"iso_checksum": "bba314624956961a2ea31dd460cd860a77911c1e0a56e4820a12b9c5dad363f5",
       "iso_checksum_type": "sha256",
-      "iso_urls": [ "file:///Users/Shared/CentOS-7-x86_64-Minimal-1511.iso",
-                 "http://mirror.nl.leaseweb.net/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso" ],
-      "output_directory": "packer-centos-7.1-x86_64-vmware-oss",
+      "iso_urls": [ "file:///Users/Shared/CentOS-7-x86_64-Minimal-1708.iso",
+                 "http://mirror.nl.leaseweb.net/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1708.iso"
+      ],
+      "output_directory": "output-virtualbox-iso",
       "ssh_username": "root",
       "ssh_password": "vagrant",
       "ssh_port": 22,
@@ -97,10 +99,10 @@
     "compression_level": 9,
     "override": {
         "vmware": {
-          "compression_level": 0
+          "compression_level": 5
         }
     },
     "keep_input_artifact": false,
-    "output": "packer/{{.Provider}}-centos7.box"
+    "output": "packer/{{.Provider}}-centos74.box"
   }]
 }
