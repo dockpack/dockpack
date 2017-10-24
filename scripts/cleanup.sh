@@ -15,7 +15,7 @@ echo "==> Cleaning up temporary network addresses"
 # Make sure udev doesn't block our network
 if grep -q -i "release 6" /etc/redhat-release ; then
     rm -f /etc/udev/rules.d/70-persistent-net.rules
-    mkdir /etc/udev/rules.d/70-persistent-net.rules
+    mkdir -p /etc/udev/rules.d/70-persistent-net.rules
 fi
 rm -rf /dev/.udev/
 if [ -f /etc/sysconfig/network-scripts/ifcfg-eth0 ] ; then
@@ -27,14 +27,12 @@ service rsyslog stop
 service auditd stop
 
 logrotate -f /etc/logrotate.conf
-rm -f /var/log/*-???????? /var/log/*.gz
-rm -f /var/log/dmesg.old
-rm -rf /var/log/anaconda
+rm -rf /var/log/{*-????????,/var/log/dmesg.old,/var/log/*.gz,/var/log/anaconda}
 truncate -s0 /var/log/audit/audit.log
 truncate -s0 /var/log/wtmp
 truncate -s0 /var/log/lastlog
 truncate -s0 /var/log/grubby
-truncate -s0 ~root/.bash_history
+truncate -s0 /root/.bash_history
 
 # Whiteout the swap partition to reduce box size
 # Swap is disabled till reboot
