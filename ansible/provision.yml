@@ -1,22 +1,22 @@
----
+#!/usr/bin/env ansible-playbook
 # This playbook is run as a provisioner for vagrant
 ### centos7
 - hosts: centos7
   user: vagrant
-  sudo: yes
+  become: yes
 
   roles:
-    - RHEL7-CIS
+    - loghost
 
 ### centos6
 - hosts: centos6
   user: vagrant
-  sudo: yes
+  become: yes
 
   vars_files:
     - "group_vars/centos6"
 
-  roles: 
+  roles:
     - { role: RHEL6-STIG, rhel6stig_cat2: true, rhel6stig_cat3: true, rhel6stig_is_mail_relay: true }
 
 
@@ -24,7 +24,7 @@
 - name: bootstrap ubuntu hosts
   hosts: ubuntu
   gather_facts: True
-  sudo: yes
+  become: yes
 
   vars_files:
     - "group_vars/ubuntu"
@@ -39,12 +39,12 @@
 
 ### fedora
 - name: bootstrap fedora hosts
-  hosts: fedora22
+  hosts: fedora
   gather_facts: True
-  sudo: yes
-
+  become: yes
   roles:
-    - ntp
+    - loghost
+
 
 - name: bootstrap coreos hosts
   hosts: coreos
