@@ -18,5 +18,14 @@ Development cycle for centos7
 -----------------------------
 Check the Makefile
 
+Export these in the environment so packer can validate the dockpack-centos7.json file:
+```
+export ARM_RESOURCE_GROUP=you_group_it
+export ARM_SUBSCRIPTION_ID=your_bogus
+export ARM_STORAGE_ACCOUNT=you_store_it
+export ARM_CLIENT_SECRET=your_bogus
+export ARM_TENNANT_ID=your_bogus
+export ARM_CLIENT_ID=your_bogus
+```
 
 @bbaassssiiee

@@ -2,15 +2,44 @@ VAGRANT_DEFAULT_PROVIDER=virtualbox
 DOWNLOADS=downloads
 FLAVOR=centos7
 
+#export ARM_STORAGE_ACCOUNT=you_store_it
+#export ARM_RESOURCE_GROUP=you_group_it
+
+# Generated
+PASSPRHASE:=$(shell openssl rand --hex 8)
+
 .PHONY: help
 help:
 	@echo 'Usage:'
 	@echo "    'make check' to verify dependencies"
 	@echo "    'make prepare' to set up local tools"
-	@echo "    'make build' to create a ${FLAVOR} box"
+	@echo "    'make box' to create a ${FLAVOR} box for VirtualBox"
+	@echo "    'make vm' to create a ${FLAVOR} for VMWare Desktop/Fusion"
+	@echo "    'make azure-arm' to create a ${FLAVOR} image in Azure"
 	@echo "    'make test' to test the box"
 	@echo "    'make clean' to start all over again"
 	@echo
+
+
+# Create the ssh certificate signing key.
+pki/ca_key.pub:
+	ssh-keygen -f pki/ca_key -C dockpack -N "${PASSPRHASE}"
+	@echo ${PASSPRHASE} > pki/.ca_passphrase
+
+.PHONY: ssh_ca
+ssh_ca: pki/ca_key.pub
+
+# Create a ssh key pair for ansible
+pki/ansible.pub:
+	@ssh-keygen -N ${PASSPRHASE} -C ansible -f pki/ansible
+
+# CA sign the public key with the publice key of the CA
+pki/ansible-cert.pub: pki/ansible.pub pki/ca_key.pub
+	cat pki/.ca_passphrase
+	ssh-keygen -s pki/ca_key -I ansible -n ansible pki/ansible.pub
+
+.PHONY: ssh_key
+ssh_key: pki/ansible-cert.pub
 
 
 .PHONY: check
@@ -61,19 +90,29 @@ packer/vmware-${FLAVOR}.box:
 	packer validate dockpack-${FLAVOR}.json
 	packer build --only=vmware-iso dockpack-${FLAVOR}.json
 
-virtualvm: packer/virtualbox-${FLAVOR}.box
+virtualbox: packer/virtualbox-${FLAVOR}.box
 	vagrant box remove dockpack/${FLAVOR} --provider=virtualbox || true
-	packer validate dockpack-${FLAVOR}.json
-	packer build -only=virtualbox-iso dockpack-${FLAVOR}.json
 	vagrant box add --force dockpack/${FLAVOR} packer/virtualbox-${FLAVOR}.box
-	vagrant up ${FLAVOR}
+	vagrant up --provider=virtualbox ${FLAVOR}
 
-vmwarevm: packer/vmware-${FLAVOR}.box
+vmware: packer/vmware-${FLAVOR}.box
+	vagrant box remove dockpack/${FLAVOR} --provider=vmware_desktop || true
+	packer validate dockpack-${FLAVOR}.json
+	packer build -only=vmware_desktop dockpack-${FLAVOR}.json
 	vagrant box add --force dockpack/${FLAVOR} packer/vmware-${FLAVOR}.box
+	vagrant up --provider=vmware_desktop ${FLAVOR}
 
-build: check
+box: check pki/ansible-cert.pub
 	packer build -only=virtualbox-iso dockpack-${FLAVOR}.json
 
+vm: check pki/ansible-cert.pub
+	packer build -only=vmware-iso dockpack-${FLAVOR}.json
+
+azure-arm: check pki/ansible-cert.pub
+	packer build -only=azure-arm dockpack-${FLAVOR}.json
+
+up:
+	vagrant up ${FLAVOR}
 # ---------------------------------------------------------
 
 # ---------------------------------------------------------
@@ -87,13 +126,6 @@ coreos:
 	vagrant up coreos
 
 # ---------------------------------------------------------
-
-up:
-	vagrant up ${FLAVOR}
-
-virtualbox: ${FLAVOR}
-
-
 
 # dockpack uses packer to build Centos and Windows. Create a local cache in downloads
 download:
