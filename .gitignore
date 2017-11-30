@@ -1,3 +1,4 @@
+hardening.sh
 
 # rm -rf .vagrant to release your burdens.
 .vagrant
