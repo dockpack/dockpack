@@ -4,6 +4,8 @@
 # to re-install: use the force, Luke Skywalker
 # ansible-galaxy install --force -r requirements.yml
 
+- src: wasilak.centos-kernel
+
 ## Github forks of Galaxy roles
 
 # Under development
