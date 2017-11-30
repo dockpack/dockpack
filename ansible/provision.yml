@@ -7,6 +7,13 @@
 
   roles:
     - loghost
+    - wasilak.centos-kernel
+
+- hosts: cloud
+  become: yes
+
+  roles:
+    - cis_audit
 
 ### centos6
 - hosts: centos6
