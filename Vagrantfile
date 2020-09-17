@@ -91,7 +91,6 @@ Vagrant.configure(2) do |config|
     end
   end
 
-
   # Centos 6: Create the DISO STIG hardened centos6 box with 'packer build centos6.json'
   config.vm.define :centos6, autostart: true do |centos6_config|
     centos6_config.vm.box = "dockpack/centos6"
@@ -101,25 +100,30 @@ Vagrant.configure(2) do |config|
       vmware.vmx["memsize"] = "2048"
       vmware.vmx["numvcpus"] = "2"
     end
-    centos6_config.vm.provider "virtualbox" do |vb|
-      vb.name = "centos6"
-			vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-      vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+    centos6_config.vm.provider "virtualbox" do |virtualbox|
+      virtualbox.name = "centos6"
+			virtualbox.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      virtualbox.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+      virtualbox.customize ["modifyvm", :id, "--memory", 4096]
+      virtualbox.customize ["modifyvm", :id, "--vram", "64"]
     end
   end
 
   ## Ubuntu Official: https://cloud-images.ubuntu.com/vagrant/
-  config.vm.define :ubuntu14, autostart: true do |ubuntu14_config|
-    ubuntu14_config.vm.box = "ubuntu14"
-    ubuntu14_config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
-    ubuntu14_config.vm.network "forwarded_port", id: 'ssh', guest: 22, host: 2202, auto_correct: true
+  config.vm.define :ubuntu16, autostart: true do |ubuntu16_config|
+    ubuntu16_config.vm.box = "ubuntu16"
+    ubuntu16_config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/20190425/trusty-server-cloudimg-amd64-vagrant-disk1.box"
+    ubuntu16_config.vm.network "forwarded_port", id: 'ssh', guest: 22, host: 2202, auto_correct: true
 
-    ubuntu14_config.vm.provider "vmware_fusion" do |vmware|
-      vmware.vmx["memsize"] = "2048"
+    ubuntu16_config.vm.provider "vmware_fusion" do |vmware|
+      vmware.vmx['displayname'] = "ubuntu16"
+      vmware.vmx["memsize"] = "4096"
       vmware.vmx["numvcpus"] = "2"
     end
-    ubuntu14_config.vm.provider "virtualbox" do |virtualbox|
-      virtualbox.name = "ubuntu14"
+    ubuntu16_config.vm.provider "virtualbox" do |virtualbox|
+      virtualbox.name = "ubuntu16"
+      virtualbox.customize ["modifyvm", :id, "--memory", 4096]
+      virtualbox.customize ["modifyvm", :id, "--vram", "64"]
       virtualbox.gui = true
     end
   end
