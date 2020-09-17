@@ -10,6 +10,8 @@
 
 # Under development
 - src: https://github.com/bbaassssiiee/RHEL7-CIS.git
+  scm: git
+  version: master
   path: ./roles/
 
 - src: https://github.com/bbaassssiiee/RHEL6-STIG.git
