@@ -65,13 +65,14 @@ virtualvm: packer/virtualbox-${FLAVOR}.box
 	vagrant box remove dockpack/${FLAVOR} --provider=virtualbox || true
 	packer validate dockpack-${FLAVOR}.json
 	packer build -only=virtualbox-iso dockpack-${FLAVOR}.json
+box:
 	vagrant box add --force dockpack/${FLAVOR} packer/virtualbox-${FLAVOR}.box
 	vagrant up ${FLAVOR}
 
 vmwarevm: packer/vmware-${FLAVOR}.box
 	vagrant box add --force dockpack/${FLAVOR} packer/vmware-${FLAVOR}.box
 
-build: check
+build:
 	packer build -only=virtualbox-iso dockpack-${FLAVOR}.json
 
 # ---------------------------------------------------------

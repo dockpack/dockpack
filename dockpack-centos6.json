@@ -2,18 +2,18 @@
   "builders": [
     {
       "boot_command": [
-        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-6.7-x86_64-noX.cfg<enter><wait>"
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-6.10-x86_64-noX.cfg<enter><wait>"
       ],
       "guest_additions_mode": "upload",
       "guest_additions_path": "VBoxGuestAdditions.iso",
       "guest_os_type": "RedHat_64",
       "headless": false,
       "http_directory": "kickstart",
-      "iso_checksum": "171ce654ec06040d096daf75934ca8ca",
-      "iso_checksum_type": "md5",
+      "iso_checksum": "56f7b078a3b443095ba006cdc85319c691251cda98c5d73d12ef6db7aff6b4c1",
+      "iso_checksum_type": "sha256",
       "iso_urls": [
-        "file:///Users/Shared/CentOS-6.7-x86_64-netinstall.iso",
-        "http://www.mirrorservice.org/sites/mirror.centos.org/6/isos/x86_64/CentOS-6.7-x86_64-netinstall.iso"
+        "file:///Users/Shared/CentOS-6.10-x86_64-netinstall.iso",
+        "http://www.mirrorservice.org/sites/mirror.centos.org/6/isos/x86_64/CentOS-6.10-x86_64-netinstall.iso"
       ],
       "shutdown_command": "echo 'vagrant' | sudo -S /sbin/shutdown -h 0",
       "ssh_password": "vagrant",
@@ -39,17 +39,17 @@
     },
     {
       "boot_command": [
-        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-6.7-x86_64-noX.cfg<enter><wait>"
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/centos-6.10-x86_64-noX.cfg<enter><wait>"
       ],
       "boot_wait": "30s",
       "guest_os_type": "Centos-64",
       "headless": false,
       "http_directory": "kickstart",
-      "iso_checksum": "171ce654ec06040d096daf75934ca8ca",
-      "iso_checksum_type": "md5",
+      "iso_checksum": "56f7b078a3b443095ba006cdc85319c691251cda98c5d73d12ef6db7aff6b4c1",
+      "iso_checksum_type": "sha256",
       "iso_urls": [
-        "file:///Users/Shared/CentOS-6.7-x86_64-netinstall.iso",
-        "http://www.mirrorservice.org/sites/mirror.centos.org/6/isos/x86_64/CentOS-6.7-x86_64-netinstall.iso"
+        "file:///Users/Shared/CentOS-6.10-x86_64-netinstall.iso",
+        "http://www.mirrorservice.org/sites/mirror.centos.org/6/isos/x86_64/CentOS-6.10-x86_64-netinstall.iso"
       ],
       "shutdown_command": "echo 'vagrant' | sudo -S /sbin/shutdown -h 0",
       "ssh_password": "vagrant",
