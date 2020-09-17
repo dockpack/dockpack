@@ -7,7 +7,7 @@
 
   roles:
     - loghost
-    - wasilak.centos-kernel
+    - RHEL7-CIS
 
 - hosts: cloud
   become: yes
@@ -16,15 +16,15 @@
     - cis_audit
 
 ### centos6
-- hosts: centos6
-  user: vagrant
-  become: yes
+#- hosts: centos6
+#  user: vagrant
+#  become: yes
 
-  vars_files:
-    - "group_vars/centos6"
+#  vars_files:
+#    - "group_vars/centos6"
 
-  roles:
-    - { role: RHEL6-STIG, rhel6stig_cat2: true, rhel6stig_cat3: true, rhel6stig_is_mail_relay: true }
+#  roles:
+#    - { role: RHEL6-STIG, rhel6stig_cat2: true, rhel6stig_cat3: true, rhel6stig_is_mail_relay: true }
 
 
 ### Ubuntu
